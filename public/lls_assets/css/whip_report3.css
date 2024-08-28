@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+
+}
+
+
+.container {
+    padding: 60px 100px 0px 100px;
+}
+
+.header {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+   
+}
+
+.header h3,h5 {
+    margin: 0;
+    padding: 0;
+}
+
+
+table {
+    margin-top: 25px;
+}
+
+.tb {
+    font-weight: 700;
+}
+
+
+.table-information {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.table-information th{
+    border: 1px solid black;
+    border-collapse: collapse;
+    
+  }
+
+  .table-information tr:nth-child(1) {
+    background-color: green;
+  }
+
+.table-information td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  .impression {
+    text-align: center;
+    margin-top: 20px;
+  }
+.impression span:nth-child(1) {
+    font-size: 20px;
+    font-weight: 800;
+    /* margin-left: px; */
+}
+.bg_color_skilled {
+    background-color: #fdfa72;
+}
+
+.bg_color_unskilled {
+    background-color: #A24857;
+}
+
+.within_project_skilled_unskilled {
+    background-color: #DFC5FE;
+}
+
+
+.bottom1 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    align-items: center;
+}
+
+.bottom2 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+
+
+.bottom2 p {
+    padding: 0;
+    margin: 0;
+}

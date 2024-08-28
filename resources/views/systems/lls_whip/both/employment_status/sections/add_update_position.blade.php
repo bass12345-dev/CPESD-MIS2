@@ -1,0 +1,32 @@
+<div class="form-element-area">
+    <div class="container">
+        <form id="add_update_form">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-element-list">
+                        <div class="basic-tb-hd">
+                            <h2>Add Employment Status</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group ic-cmp-int">
+                                    <div class="form-ic-cmp">
+                                        <i class="notika-icon notika-edit"></i>
+                                    </div>
+                                    <div class="nk-int-st">
+                                    <input type="hidden" class="form-control" name="status_id">
+                                        <input type="text" class="form-control" name="status"
+                                            placeholder="Employment Status" required >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int mg-t-15">
+                            <button type="submit" class="btn btn-primary notika-btn-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
