@@ -20,6 +20,7 @@
 @endsection
 @section('js')
 <script src="https://jsuites.net/v4/jsuites.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-loading-overlay@1.1.0/dist/js-loading-overlay.min.js"></script>
 @include('global_includes.js.custom_js.datatable_settings')
 @include('global_includes.js.custom_js.select_by_month')
 <script>
@@ -28,7 +29,7 @@
         if (month != null) {
             add_to_url = '?date=' + month
         }
-
+        
         table = $("#datatables-buttons").DataTable({
             responsive: true,
             ordering: false,
@@ -52,17 +53,24 @@
                 }
             },
 
-            // columns: [{
-            //         data: 'number',
-            //     },
-            //     {
-            //         data: 'name',
-            //     },
-            //     {
-            //         data: 'datetime'
-            //     },
+            columns: [{
+                    data: 'number',
+                },
+                {
+                    data: 'name',
+                },
+                {
+                    data: 'user_type',
+                },
+                {
+                    data: 'action',
+                },
+                
+                {
+                    data: 'action_datetime'
+                },
 
-            // ],
+            ],
 
         });
 

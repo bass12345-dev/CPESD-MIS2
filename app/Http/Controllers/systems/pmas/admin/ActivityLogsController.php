@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\CustomRepository;
 use App\Repositories\pmas\user\UserPmasQuery;
 use App\Services\CustomService;
+use App\Services\pmas\admin\ActionLogService;
 use App\Services\user\UserService;
 use Carbon\Carbon;
 
@@ -16,16 +17,17 @@ class ActivityLogsController extends Controller
     protected $customService;
     protected $userService;
 
+    protected $actionLogService;
     protected $userPmasQuery;
 
-    public function __construct(CustomRepository $customRepository, CustomService $customService, UserService $userService,UserPmasQuery $userPmasQuery)
+    public function __construct(CustomRepository $customRepository, CustomService $customService, UserService $userService,UserPmasQuery $userPmasQuery, ActionLogService $actionLogService)
     {
 
         $this->customRepository = $customRepository;
         $this->userPmasQuery    = $userPmasQuery;
         $this->customService = $customService;
         $this->userService = $userService;
-     
+        $this->actionLogService = $actionLogService;
         $this->conn = config('custom_config.database.pmas');
 
     }
@@ -39,15 +41,15 @@ class ActivityLogsController extends Controller
 
     public function get_logged_in_history(){
 
-        // $month = '';
-        // $year = '';
-        // if(isset($_GET['date'])){
-        //     $month =   date('m', strtotime($_GET['date']));
-        //     $year =   date('Y', strtotime($_GET['date']));
-        // }
-        // $user = $this->actionLogsService->AllActionLogs($month,$year);
-        // return response()->json($user);
-        return 'heelo';
+        $month = '';
+        $year = '';
+        if(isset($_GET['date'])){
+            $month =   date('m', strtotime($_GET['date']));
+            $year =   date('Y', strtotime($_GET['date']));
+        }
+        $user = $this->actionLogService->AllActionLogs($month,$year);
+        return response()->json($user);
+       
     }
 
 
