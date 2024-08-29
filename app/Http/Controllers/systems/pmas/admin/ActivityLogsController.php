@@ -14,21 +14,21 @@ class ActivityLogsController extends Controller
 
     protected $conn;
     protected $customRepository;
-    protected $customService;
+
     protected $userService;
 
     protected $actionLogService;
     protected $userPmasQuery;
 
-    public function __construct(CustomRepository $customRepository, CustomService $customService, UserService $userService,UserPmasQuery $userPmasQuery, ActionLogService $actionLogService)
+    public function __construct(CustomRepository $customRepository, UserService $userService,UserPmasQuery $userPmasQuery, ActionLogService $actionLogService)
     {
 
         $this->customRepository = $customRepository;
         $this->userPmasQuery    = $userPmasQuery;
-        $this->customService = $customService;
         $this->userService = $userService;
         $this->actionLogService = $actionLogService;
         $this->conn = config('custom_config.database.pmas');
+        
 
     }
     public function index()
