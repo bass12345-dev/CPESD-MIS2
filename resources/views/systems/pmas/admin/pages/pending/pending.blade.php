@@ -221,6 +221,11 @@
                         }
                     },]
                 })
+            },
+            error : function(err){
+                toast_message_error('Pending Transaction don\'t load properly. Please Reload the Page');
+                $('#reload_admin_pending_transaction').removeClass('loader');
+                $('#reload_admin_pending_transaction').html('Reload <i class="ti-loop"></i>');
             }
         })
     }
@@ -283,6 +288,9 @@
 
     $(document).ready(function () {
         fetch_pending_transactions();
-    })
+    });
+    $(document).on('click', 'a#view_transaction', function (e) {
+        window.open(base_url + '/admin/pmas/view-transaction/' + $(this).data('id'), '_blank');
+    });
 </script>
 @endsection

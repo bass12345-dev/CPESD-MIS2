@@ -207,8 +207,14 @@ Route::middleware([SessionGuard::class])->prefix('/user/act')->group(function ()
       Route::get("/lls/g-a-e",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'get_all_establishment']);
       Route::post("/lls/d-e",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'delete_establishment']);
       Route::post("/lls/u-e",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'update_establishment']);
+      Route::post("/lls/g-a-e-e",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'get_establishment_employees']);
+      Route::post("/lls/i-u-e-e",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'insert_or_update_establishment_employee']);
+      Route::post("/lls/g-g-e-i",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'get_gender_establishment_inside']);
+      Route::post("/lls/g-g-e-o",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'get_gender_establishment_outside']);
+      Route::post("/lls/g-e-p",[App\Http\Controllers\systems\lls_whip\lls\both\EstablishmentsController::class, 'get_establishment_positions']);
 
-
+      
+     
                                  //WORKERS HIRED INFRASTRACTURE PROJECT
       //Dashboard
          Route::get("/whip/g-c-i-o",[ App\Http\Controllers\systems\lls_whip\whip\admin\DashboardController::class, 'get_contractors_inside_outside']);

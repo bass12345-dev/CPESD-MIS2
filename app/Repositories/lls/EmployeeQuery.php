@@ -100,15 +100,15 @@ class EmployeeQuery
     return $rows;
   }
 
-  public function get_establishment_employee($conn, $id)
+  public function get_establishment_employee($id)
   {
 
-    $rows = DB::connection($conn)->table('establishment_employee as establishment_employee')
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
       ->leftJoin('employees', 'employees.employee_id', '=', 'establishment_employee.employee_id')
       ->leftJoin('positions', 'positions.position_id', '=', 'establishment_employee.position_id')
-      ->leftJoin('employment_status', 'employment_status.employ_stat_id', '=', 'establishment_employee.status_of_employment_id')
+      ->leftJoin('employment_status', 'employment_status.employment_status_id', '=', 'establishment_employee.status_of_employment_id')
       ->select(
-        'establishment_employee.estab_emp_id as estab_emp_id',
+        'establishment_employee.employee_id as estab_emp_id',
         //User
         'employees.first_name as first_name',
         'employees.middle_name as middle_name',
@@ -123,7 +123,7 @@ class EmployeeQuery
         'positions.position_id as position_id',
         'positions.position as position',
         //Status
-        'employment_status.employ_stat_id as employ_stat_id',
+        'employment_status.employment_status_id as employment_status_id',
         'employment_status.status as status',
         //Nature of Employment
         'establishment_employee.employee_id as employee_id',
@@ -323,7 +323,7 @@ class EmployeeQuery
 
   public function gender_inside($id, $default_city)
   {
-    $rows = DB::connection(config('app._database.lls_whip'))->table('employees as employees')
+    $rows = DB::connection($this->conn)->table('employees as employees')
       ->leftJoin('establishment_employee', 'establishment_employee.employee_id', '=', 'employees.employee_id')
       ->select(
 
@@ -340,7 +340,7 @@ class EmployeeQuery
 
   public function gender_outside($id, $default_city)
   {
-    $rows = DB::connection(config('app._database.lls_whip'))->table('employees as employees')
+    $rows = DB::connection($this->conn)->table('employees as employees')
       ->leftJoin('establishment_employee', 'establishment_employee.employee_id', '=', 'employees.employee_id')
       ->select(
 
@@ -358,7 +358,7 @@ class EmployeeQuery
   public function establishment_positions($id)
   {
 
-    $rows = DB::connection(config('app._database.lls_whip'))->table('establishment_employee as establishment_employee')
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
       ->join('positions', 'positions.position_id', '=', 'establishment_employee.position_id')
       ->select(
         //Employee

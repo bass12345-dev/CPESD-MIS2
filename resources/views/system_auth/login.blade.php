@@ -17,13 +17,12 @@
                     <div class="d-table-cell align-middle">
                         <div class="card">
                             <div class="card-body">
-                                <a href="{{url('/')}}"><i class="fas fa-arrow-left"></i></a>
+                               
                                 <div class="text-center mt-4">
                                     <h1 class="h2 text-black">Welcome back to!</h1>
                                     <h1 class="h2 text-black">CPESD MIS</h1>
                                     <p class="lead text-black">
                                         Sign in to your account to continue
-
                                     </p>
                                 </div>
                                 <div class="m-sm-3">
@@ -33,10 +32,6 @@
                                             <input class="form-control form-control-lg" type="text" name="username"
                                                 placeholder="Enter your Username" />
                                         </div>
-                                        <!-- <div class="mb-3">
-											<label class="form-label">Password</label>
-											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" autocomplete required />
-										</div> -->
                                         <label class="form-label">Password</label>
                                         <div class="input-group flex-nowrap pass" style="height: 40px;">
 
@@ -47,26 +42,23 @@
                                                 <i class="fas fa-eye show_icon"></i>
                                                 <i class="fas fa-eye-slash hidden_icon" hidden></i>
                                             </span>
-
-
                                         </div>
-
                                         <div class="g-recaptcha mt-4" data-sitekey={{config('services.recaptcha.key')}}>
                                         </div>
-
                                         <div class="d-grid gap-2 mt-5">
                                             <button type="submit" class="btn btn-lg btn-primary">Submit</button>
                                         </div>
                                         @include('components.submit_loader')
 
                                     </form>
+                                    <div class="text-center mb-3 text-black mt-4">
+                                        Don't have an account? <a href="{{url('/dts/register')}}">Sign up</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-center mb-3 text-white">
-                            Don't have an account? <a href="{{url('/dts/register')}}">Sign up</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -164,16 +156,16 @@
     var camera, scene, renderer, composer;
     var sw = window.innerWidth, sh = window.innerHeight;
     var mouse = { down: false, x: 0, y: 0 };
-    var bits = 6;
+    var bits = 5;
     var depth = 24;
-    var walls = 5;
+    var walls = 10;
     var size = 10;
     var padding = 1;
     var boxSize = size - padding * 2;
     var tunnel;
     var groups = [];
     var blocks = [];
-    
+
     var can = document.createElement("canvas"); // originally used for debugging lattice, now texture too!
     //document.body.appendChild(can);
     can.width = walls * (bits * size - size);// + size);

@@ -111,32 +111,7 @@ return [
 
 
 
-    'lls_nature_of_employment' => [
-        ['permanent','Permanent'],
-        ['probationary','Probationary'],
-        ['contractuals','Contractuals'],
-        ['project_based','Project Based'],
-        ['seasonal','Seasonal'],
-        ['job_order','Job order'],
-        ['mgt','Mgt'],        
-    ],
-
-
-    'lls_nature_of_employment2' => array(
-        'permanent' => 'Permanent',
-        'probationary' =>'Probationary',
-        'contractuals' =>'Contractuals',
-        'project_based' =>'Project Based',
-        'seasonal' =>'Seasonal',
-        'job_order' =>'Job order',
-        'mgt' =>'Mgt',        
-    ),
-
-
     
-
-    'default_city' => '1004209000-City of Oroquieta',
-
 
 
 

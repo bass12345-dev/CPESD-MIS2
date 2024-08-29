@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
                     <div class="logo-area" >
-                        <a href="" style="color: #fff;" class="text-center">
-                            <h4>LABOR LOCALIZATION - {{session('user_type') == 'user' ? 'User' : 'Administrator  '}}</h4>
+                        <a href=""  class="text-center">
+                            <h3 style="color: #fff;">LABOR LOCALIZATION</h3>
                         </a>
                     </div>
                 </div>
