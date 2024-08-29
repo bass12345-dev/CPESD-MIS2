@@ -5,9 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\CustomRepository;
 use App\Repositories\pmas\user\UserPmasQuery;
 use App\Services\CustomService;
-use App\Services\pmas\admin\ActionLogService;
 use App\Services\user\UserService;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class ActivityLogsController extends Controller
@@ -17,17 +15,17 @@ class ActivityLogsController extends Controller
     protected $customRepository;
     protected $customService;
     protected $userService;
-    protected $actionLogsService;
+
     protected $userPmasQuery;
 
-    public function __construct(CustomRepository $customRepository, CustomService $customService, UserService $userService,UserPmasQuery $userPmasQuery, ActionLogService $actionLogService)
+    public function __construct(CustomRepository $customRepository, CustomService $customService, UserService $userService,UserPmasQuery $userPmasQuery)
     {
 
         $this->customRepository = $customRepository;
         $this->userPmasQuery    = $userPmasQuery;
         $this->customService = $customService;
         $this->userService = $userService;
-        $this->actionLogsService = $actionLogService;
+     
         $this->conn = config('custom_config.database.pmas');
 
     }
