@@ -136,6 +136,7 @@ class CsoService
                 'name' => $this->userService->user_full_name($key),
                 'user_type' => $key->user_type,
                 'action' => $key->action,
+                'id'     => $key->_id,
                 'action_datetime' => date('M d Y h:i A', strtotime($key->activity_log_created))
 
             );

@@ -1,4 +1,4 @@
-@extends('systems.pmas.admin.layout.admin_master')
+@extends('systems.rfa.admin.layout.admin_master')
 @section('title', $title)
 @section('content')
 <div class="row">
@@ -42,7 +42,7 @@
             "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             buttons: datatables_buttons(),
             ajax: {
-                url: base_url + "/admin/act/pmas/logged-in-history" + add_to_url,
+                url: base_url + "/admin/act/rfa/logged-in-history" + add_to_url,
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -64,8 +64,8 @@
             },
             {
                 data: null,
-                render: function (row) {
-                    return '<a href="">' + row.action + '</a>';
+                render : function(row){
+                    return '<a href="'+base_url+'/admin/rfa/view-rfa/'+row.id+'">'+row.action+'</a>';
                 }
             },
 
@@ -82,5 +82,6 @@
     $(document).ready(function () {
         search(month);
     });
+
 </script>
 @endsection

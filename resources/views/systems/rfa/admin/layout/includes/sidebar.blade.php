@@ -22,6 +22,9 @@
                     <li class="<?= $segments[2] == 'clients' ? 'active' : '' ?>"><a
                             href="{{url('/admin/rfa/clients')}}"><i class="fa fa-history"></i>
                             <span>Clients</span></a></li>
+                    <li class="<?= $segments[2] == 'activity-logs' ? 'active' : '' ?>"><a
+                            href="{{url('/admin/rfa/activity-logs')}}"><i class="fa fa-history"></i>
+                            <span>Activity Logs</span></a></li>
                 </ul>
             </nav>
         </div>

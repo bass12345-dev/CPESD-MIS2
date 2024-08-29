@@ -63,7 +63,10 @@
                 data: 'user_type',
             },
             {
-                data: 'action',
+                data: null,
+                render : function(row){
+                    return '<a href="'+base_url+'/user/cso/cso-information/'+row.id+'">'+row.action+'</a>';
+                }
             },
 
             {

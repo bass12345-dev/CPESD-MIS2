@@ -46,6 +46,7 @@ class CSOQuery
     
                 'activity_logs.activity_log_created as activity_log_created',
                 'activity_logs.action as action',
+                'activity_logs._id as _id',
                 //User
                 'users.first_name as first_name',
                 'users.middle_name as middle_name',
@@ -67,6 +68,7 @@ class CSOQuery
 
             'activity_logs.activity_log_created as activity_log_created',
             'activity_logs.action as action',
+            'activity_logs._id as _id',
             //User
             'users.first_name as first_name',
             'users.middle_name as middle_name',

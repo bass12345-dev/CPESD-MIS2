@@ -523,6 +523,9 @@ Route::middleware([SessionGuard::class,AdminCheck::class])->prefix('/admin')->gr
          Route::get("/rfa/clients",[ App\Http\Controllers\systems\rfa\admin\ClientController::class, 'index']);
          //View RFA
          Route::get("/rfa/view-rfa/{id}",[ App\Http\Controllers\systems\rfa\admin\PendingController::class, 'view_rfa']);
+
+         //Activity Logs
+         Route::get("/rfa/activity-logs",[ App\Http\Controllers\systems\rfa\admin\ActivityLogsController::class, 'index']);
         
                                  //PMAS
 
@@ -662,7 +665,8 @@ Route::middleware([SessionGuard::class])->prefix('/admin/act')->group(function (
                Route::post("/rfa/delete-client",[ App\Http\Controllers\systems\rfa\admin\ClientController::class, 'delete_client']);
             //Generate Report
                Route::post("/rfa/generate-rfa-report",[ App\Http\Controllers\systems\rfa\admin\ReportController::class, 'generate_rfa_report']);
-
+            //Activity Logs
+               Route::get("/rfa/logged-in-history",[ App\Http\Controllers\systems\rfa\admin\ActivityLogsController::class, 'get_logged_in_history']);
 
                                  //PMAS
 
