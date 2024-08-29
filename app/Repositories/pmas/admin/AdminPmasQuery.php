@@ -149,7 +149,7 @@ class AdminPmasQuery
             ->select(   //history
     
                 'activity_logs.activity_log_created as activity_log_created',
-                'activity_logs.activity_log_created as activity_log_created',
+                'activity_logs.action as action',
                 //User
                 'users.first_name as first_name',
                 'users.middle_name as middle_name',
@@ -170,7 +170,7 @@ class AdminPmasQuery
         ->select(   //history
 
             'activity_logs.activity_log_created as activity_log_created',
-            'activity_logs.activity_log_created as activity_log_created',
+            'activity_logs.action as action',
             //User
             'users.first_name as first_name',
             'users.middle_name as middle_name',
@@ -179,6 +179,8 @@ class AdminPmasQuery
             'users.user_type as user_type',
           )
         ->where('activity_logs.type', 'pmas')
+        ->whereMonth('activity_logs.activity_log_created', '=', $month)
+        ->whereYear('activity_logs.activity_log_created', '=', $year)
         ->orderBy('activity_logs.activity_log_created', 'desc')
         ->get();
     return $row;

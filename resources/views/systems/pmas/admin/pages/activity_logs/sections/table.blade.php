@@ -8,9 +8,11 @@
                      <table id="datatables-buttons" style="width:100%" class="text-center">
                         <thead class="bg-light text-capitalize">
                            <tr>
+                              <th>#</th>
                               <th>Name</th>
+                              <th>User Type</th>
                               <th>Action</th>
-                              <th>Type</th>
+                              
                               <th>Date and Time</th>
                            </tr>
                         </thead>
