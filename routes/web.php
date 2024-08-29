@@ -186,7 +186,7 @@ Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
 
          Route::get("/cso/dashboard",[ App\Http\Controllers\systems\cso\DashboardController::class, 'index']);
          Route::get("/cso/manage-cso",[ App\Http\Controllers\systems\cso\ManageCsoController::class, 'index']);
-         Route::get("/cso/activity-logs",[ App\Http\Controllers\systems\cso\ManageCsoController::class, 'index']);
+         Route::get("/cso/activity-logs",[ App\Http\Controllers\systems\cso\ActivityLogsController::class, 'index']);
          //View
          Route::get("/cso/cso-information/{id}",[App\Http\Controllers\systems\cso\ManageCsoController::class, 'view_cso']);
 
@@ -408,6 +408,9 @@ Route::middleware([SessionGuard::class])->prefix('/user/act')->group(function ()
          //Files
             Route::post("/cso/upload-cso-file",[App\Http\Controllers\systems\cso\ManageCsoController::class, 'upload_cso_file']);
             Route::get("/cso/get-file",[App\Http\Controllers\systems\cso\ManageCsoController::class, 'get_file']);
+
+         //Activity Logs
+            Route::get("/cso/logged-in-history",[ App\Http\Controllers\systems\cso\ActivityLogsController::class, 'get_logged_in_history']);
         
             
             

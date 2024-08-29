@@ -3,7 +3,7 @@
 <head>
     @include('global_includes.meta')
     @include('systems.rfa.includes.css')
-    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    
 </head>
 <body>
     @include('components.pmas_rfa.preloader')
