@@ -52,8 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/CPESD-MIS'),
-    'asset_url' => env('ASSET_URL', 'http://localhost/CPESD-MIS/public'),
+    'url' => env('APP_URL', 'http://localhost/CPESD-MIS2'),
+    'asset_url' => env('ASSET_URL', 'http://localhost/CPESD-MIS2/public'),
 
     /*
     |--------------------------------------------------------------------------

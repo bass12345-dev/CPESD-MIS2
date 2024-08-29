@@ -25,9 +25,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-eye"></i><span>See More</span>
                         </a>
                         <ul class="collapse">
-                            <li class="<?= $segments[2] == 'cso' ? 'active' : ''?>"><a
-                                    href="{{url('/admin/pmas/cso')}}"><i class="fa fa-sitemap"></i> <span>CSO
-                                    </span></a></li>
+                           
                             <li class="<?= $segments[2] == 'responsibility-center' ? 'active' : ''?>"><a
                                     href="{{url('/admin/pmas/responsibility-center')}}"><i
                                         class="fa fa-chevron-right"></i> <span>Responsibilty Center</span></a></li>
@@ -38,6 +36,10 @@
                                     href="{{url('/admin/pmas/type-of-activity')}}"><i
                                         class="fa fa-chevron-right"></i> <span>Type of Activity</span></a></li>
                         </ul>
+                    </li>
+                    <li class="<?= $segments[2] == 'activity-logs' ? 'active' : '' ?>"><a
+                            href="{{url('/admin/pmas/activity-logs')}}"><i class="fa fa-history"></i>
+                            <span>Activity Logs</span></a>
                     </li>
                 </ul>
             </nav>

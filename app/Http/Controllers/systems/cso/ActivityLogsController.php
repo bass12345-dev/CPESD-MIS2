@@ -7,7 +7,7 @@ use App\Repositories\pmas\user\UserPmasQuery;
 use App\Services\CustomService;
 use App\Services\user\UserService;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class ActivityLogs extends Controller
 {
 
@@ -29,7 +29,8 @@ class ActivityLogs extends Controller
 
     }
     public function index()
-    {
+    {   
+        $data['current']            = Carbon::now()->year.'-'.Carbon::now()->month;
         $data['title'] = 'Activity Logs';
         return view('systems.cso.pages.activity_logs.activity_logs')->with($data);
     }

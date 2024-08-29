@@ -540,6 +540,8 @@ Route::middleware([SessionGuard::class,AdminCheck::class])->prefix('/admin')->gr
          //View 
          Route::get("/pmas/view-transaction/{id}",[ App\Http\Controllers\systems\pmas\admin\PendingController::class, 'view_transaction']);
 
+         Route::get("/pmas/activity-logs",[ App\Http\Controllers\systems\pmas\admin\ActivityLogsController::class, 'index']);
+
 
 
 
@@ -704,7 +706,9 @@ Route::middleware([SessionGuard::class])->prefix('/admin/act')->group(function (
                Route::post("/pmas/update-responsible",[ App\Http\Controllers\systems\pmas\admin\ResponsibleSectionController::class, 'update_responsible']);
                Route::post("/pmas/delete-responsible",[ App\Http\Controllers\systems\pmas\admin\ResponsibleSectionController::class, 'delete_responsible']);
 
-              
+               //Activity Logs
+               Route::get("/pmas/logged-in-history",[ App\Http\Controllers\systems\pmas\admin\ActivityLogsController::class, 'get_logged_in_history']);
+               
                
 
                

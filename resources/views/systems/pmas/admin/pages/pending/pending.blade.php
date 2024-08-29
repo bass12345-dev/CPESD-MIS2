@@ -116,6 +116,8 @@
         });
     });
 
+  
+
     $(function () {
         $('input[name="daterange_pending_filter"]').daterangepicker({
             opens: 'right',
@@ -130,6 +132,7 @@
             format: 'YYYY-MM-DD'
         }, function (start, end, label) {
             $('#pending_transactions_table').DataTable().destroy();
+           
             fetch_pending_transactions(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), filter = true);
         });
     });
