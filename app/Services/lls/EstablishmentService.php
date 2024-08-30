@@ -73,77 +73,7 @@ class EstablishmentService
     }
 
 
-    public function get_survey($id,$year){
 
-            $arr = [];
-            $natures =  config('app.lls_nature_of_employment');
-            $natures_arr = [];
-            $inside_data = [];
-            $outside_data = [];
-            foreach ($natures as $row) {
-                $inside = $this->employeeQuery->get_employee_survey_by_year_inside($this->conn,$id,$year,$row[0],$this->default_city);
-                $outside = $this->employeeQuery->get_employee_survey_by_year_outside($this->conn,$id,$year,$row[0],$this->default_city);
-                $inside_data = array(
-                    'inside_'.$row[0] => $inside,
-                    // 'outside_'.$row[0] => $outside
-                );
-                $outside_data = array(
-                    'outside_'.$row[0] => $outside,
-                    // 'outside_'.$row[0] => $outside
-                );
-
-                array_push($arr,$inside_data,$outside_data);
-            }
-
-            
-     
-
-            for ($i=0; $i < count($arr); $i++) { 
-
-                $row = array(                    
-                    'inside_permanent'        => $arr[0]['inside_permanent'],
-                    'outside_permanent'       => $arr[1]['outside_permanent'],
-                    'inside_probationary'     => $arr[2]['inside_probationary'],
-                    'outside_probationary'    => $arr[3]['outside_probationary'],
-                    'inside_contractuals'     => $arr[4]['inside_contractuals'],
-                    'outside_contractuals'    => $arr[5]['outside_contractuals'],
-                    'inside_project_based'      => $arr[6]['inside_project_based'],
-                    'outside_project_based'     => $arr[7]['outside_project_based'],
-                    'inside_seasonal'           => $arr[8]['inside_seasonal'],
-                    'outside_seasonal'          => $arr[9]['outside_seasonal'],
-                    'inside_job_order'          => $arr[10]['inside_job_order'],
-                    'outside_job_order'         => $arr[11]['outside_job_order'],
-                    'inside_mgt'                => $arr[12]['inside_mgt'],
-                    'outside_mgt'               => $arr[13]['outside_mgt'],
-                    'inside_total'              => $this->total_inside($arr),
-                    'outside_total'             => $this->total_outside($arr),
-                );
-            }
-                
-            return $row;
-        
-        }
-
-        function total_inside($arr){
-            return $arr[0]['inside_permanent'] + 
-            $arr[8]['inside_seasonal'] + 
-            $arr[2]['inside_probationary'] + 
-            $arr[10]['inside_job_order'] + 
-            $arr[4]['inside_contractuals'] + 
-            $arr[12]['inside_mgt'] + 
-            $arr[6]['inside_project_based'];
-        }
-    
-        function total_outside($arr){
-            return $arr[7]['outside_project_based'] + 
-            $arr[1]['outside_permanent'] + 
-            $arr[3]['outside_probationary'] + 
-            $arr[5]['outside_contractuals'] + 
-            $arr[9]['outside_seasonal'] + 
-            $arr[11]['outside_job_order'] + 
-            $arr[13]['outside_mgt'];
-        }
-    
     
     public function insert_establishment_employee(array $items){
             $data = [];;
@@ -194,42 +124,7 @@ class EstablishmentService
            return $data;
         }
 
-    public function Submit_Survey($row){
-
-
-        $where = array('establishment_id' => $row['establishment_id'], 'year' => $row['year']);
-
-        $row = array(    
-            'establishment_id' => $row['establishment_id'],
-            'year' => $row['year']  ,             
-            'inside_permanent'      => $row['inside_permanent'],
-            'inside_probationary'   => $row['inside_probationary'],
-            'inside_contractuals'   => $row['inside_contractuals'],
-            'inside_project_based'  => $row['inside_project_based'],
-            'inside_seasonal'       => $row['inside_seasonal'],
-            'inside_job_order'      => $row['inside_job_order'],
-            'inside_mgt'            => $row['inside_mgt'],
-            'outside_permanent'     => $row['outside_permanent'],
-            'outside_probationary'  => $row['outside_probationary'],
-            'outside_contractuals'  => $row['outside_contractuals'],  
-            'outside_project_based' => $row['outside_project_based'],
-            'outside_seasonal'      => $row['outside_seasonal'],
-            'outside_job_order'     => $row['outside_job_order'],
-            'outside_mgt'           => $row['outside_mgt'],
-        );
-
-        $count = $this->customRepository->q_get_where($this->conn,$where,$this->survey_table)->count();
-        if($count > 0 ) {
-            $user = $this->customRepository->update_item($this->conn,$this->survey_table,$where,$row);
-        }else {
-            $user = $this->customRepository->insert_item($this->conn,$this->survey_table,$row);
-        }
-
-        // $user = $this->customRepository->update_item($this->conn,$this->survey_table,$where,$row);
-        return $user;
-
-
-    }
+   
 
 
     public function compliant_process($year){
@@ -249,8 +144,8 @@ class EstablishmentService
     }
   
     function compliant_calc($id,$year){
-        $count_inside = $this->employeeQuery->count_inside($this->conn,$id,$year,$this->default_city);
-        $count_outside = $this->employeeQuery->count_outside($this->conn,$id,$year,$this->default_city);
+        $count_inside = $this->employeeQuery->count_inside($id,$year);
+        $count_outside = $this->employeeQuery->count_outside($id,$year);
         $total = $count_inside + $count_outside;
         $resp = '';
         if($total < 10){

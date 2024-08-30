@@ -1,16 +1,16 @@
-@extends('system.lls_whip.user.layout.user_master')
+@extends('systems.lls_whip.lls.user.layout.user_master')
 @section('title', $title)
 @section('content')
 <div class="notika-status-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                @include('system.lls_whip.user.lls.reports.compliant_reports.sections.table')
+                @include('systems.lls_whip.lls.both.reports.compliant_reports.sections.table')
             </div>
         </div>
     </div>
 </div>
-@include('system.lls_whip.user.lls.reports.survey_reports.modals.survey_reports_modal')
+@include('systems.lls_whip.lls.both.reports..survey_reports.modals.survey_reports_modal')
 @endsection
 @section('js')
 
@@ -18,8 +18,9 @@
     var date;
 
     $(document).on('click', 'button#by-year', function() {
-        $('#data-table-basic').DataTable().destroy();
+        $('#data-table-basic1').DataTable().destroy();
         date = $('input[name=select_month]').val();
+        
         if (!date) {
             toast_message_error('Please Select Month and Year');
         } else {
@@ -32,7 +33,7 @@
     function generate_compliant_report(date) {
 
         $.ajax({
-            url: base_url + '/admin/act/lls/generate-compliant-report',
+            url: base_url + '/user/act/lls/generate-compliant-report',
             method: 'POST',
             data: {
                 date: date
@@ -42,19 +43,11 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             beforeSend: function() {
-                JsLoadingOverlay.show({
-                    'overlayBackgroundColor': '#666666',
-                    'overlayOpacity': 0.6,
-                    'spinnerIcon': 'pacman',
-                    'spinnerColor': '#000',
-                    'spinnerSize': '2x',
-                    'overlayIDName': 'overlay',
-                    'spinnerIDName': 'spinner',
-                });
+               loader();
             },
             success: function(data) {
                 JsLoadingOverlay.hide();
-                $('#data-table-basic').DataTable({
+                $('#data-table-basic1').DataTable({
                     responsive: true,
                     ordering: false,
                     processing: true,
@@ -96,7 +89,7 @@
                             orderable: false,
                             className: 'text-center',
                             render: function(data, type, row) {
-                                return '<a href="' + base_url + '/admin/lls/establishment/' + row
+                                return '<a href="' + base_url + '/user/lls/establishment/' + row
                                     .establishment_id + '">' + row.establishment_name + '</a>'
                             }
                         },
@@ -165,9 +158,13 @@
     }
     $(document).on('click', 'a.view_survey', function() {
         let id = $(this).data('id');
+        var date = $('input[name=select_month]').val();
         $('h2.establishment_name').text('Survey Report - ' + $(this).data('establishment-name'));
+        $('h5.survey_date').text(moment(date).format('MMMM YYYY'));
+        $('#data-table-basic').DataTable().destroy();
         setTimeout(() => {
             survey(id);
+            get_employee(id);
         }, 1000);
     });
 
@@ -177,7 +174,7 @@
             date: date
         }
         $.ajax({
-            url: base_url + "/admin/act/lls/g-e-s",
+            url: base_url + "/user/act/lls/g-e-s",
             method: 'POST',
             data: data,
             dataType: 'json',
@@ -188,6 +185,7 @@
                 var table = $('table.survey-information');
                 let inside_total = [];
                 let outside_total = [];
+             
                 if(data.inside.length > 0 || data.outside.length) {
                 $.each(data.inside, function(i, row) {
                     table.find('span.' + 'inside_' + row.nature_of_employment).html(row.count);
@@ -196,6 +194,7 @@
                 let inside = total_calc(inside_total); 
                 table.find('strong.inside_total').html(inside);
                 $.each(data.outside, function(i, row) {
+                   
                     table.find('span.' + 'outside_' + row.nature_of_employment).html(row.count);
                     outside_total.push(row.count);
                 });
@@ -210,6 +209,125 @@
                 toast_message_error('Something Wrong')
             },
         });
+
+    }
+
+
+    function get_employee(id){
+
+          let data = {
+            id: id,
+            date: date
+        }
+        
+        table = $('#data-table-basic').DataTable({
+            responsive: true,
+            ordering: false,
+            processing: true,
+            searchDelay: 500,
+            pageLength: 25,
+            language: {
+                "processing": '<div class="d-flex justify-content-center "><img class="top-logo mt-4" src="{{asset("assets/img/dts/peso_logo.png")}}"></div>'
+            },
+            "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: datatables_buttons(),
+            ajax: {
+                url: base_url + "/user/act/lls/g-a-e-e",
+                method: 'POST',
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                dataSrc: "",
+                error: function(xhr, textStatus, errorThrown) {
+                    toast_message_error('Employees List is not displaying... Please Reload the Page')
+                }
+            },
+            columns: [
+
+                {
+                    data: null
+                },
+                {
+                    data: null
+                },
+                {
+                    data: 'full_address'
+                },
+                {
+                    data: 'position'
+                },
+                {
+                    data: null
+                },
+                {
+                    data: 'status_of_employment'
+                },
+                {
+                    data: 'start_date'
+                },
+                {
+                    data: 'end_date'
+                },
+                {
+                    data: null
+                },
+                
+            ],
+           
+            columnDefs: [
+
+                {
+                    targets: 0,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        return '<a href="' + base_url + '/admin/lls/employee/' + row.employee_id +
+                            '">' + row.full_name + '</a>';
+
+                    }
+                },
+                {
+                    targets: 1,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        return capitalizeFirstLetter(row.gender);
+
+                    }
+                },
+
+                {
+                    targets: 4,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        return capitalizeFirstLetter(row.nature_of_employment);
+
+                    }
+                },
+                {
+                    targets: -2,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        var result = row.level_of_employment.replaceAll('_', ' ');
+                        return capitalizeFirstLetter(result);
+
+                    }
+                },
+
+               
+            ]
+
+        });
+
+
 
     }
 

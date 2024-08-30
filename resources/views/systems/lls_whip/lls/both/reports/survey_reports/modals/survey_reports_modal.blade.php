@@ -11,6 +11,9 @@
                             <div class="basic-tb-hd">
                                 <h2 class="establishment_name"></h2>
                             </div>
+                            <div class="basic-tb-hd">
+                                <h5 class="survey_date"></h5>
+                            </div>
                             <table class="table table-hover table-striped survey-information" id="survey-information" style="width: 100%;margin-top: 10px; ">
                                 <tr class="info">
                                     <td></td>
@@ -87,6 +90,30 @@
                                     <td><strong class="title1 inside_total">-</strong></td>
                                     <td><strong class="title1 outside_total">-</strong></td>
                                 </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Full Name</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
+                                        <th>Position</th>
+                                        <th>Nature of Employment</th>
+                                        <th>Status Of Employment</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Level Of Employment</th>
+                                       
+                                    </tr>
+                                </thead>
+
                             </table>
                         </div>
                     </div>

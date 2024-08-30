@@ -117,7 +117,7 @@ class ManageUserController extends Controller
         
         $count = $this->customRepository->q_get_where($this->conn,array('system_authorized' => $_GET['sys'],'user_id' => session('user_id')),$this->user_system_authorized_table)->count();
         if($count || session('user_type') == 'admin') {
-            $link = $_GET['sys'] == 'cso' || $_GET['sys'] == 'dts' ? 'user' : session('user_type');
+            $link = $_GET['sys'] == 'cso' || $_GET['sys'] == 'dts' || $_GET['sys'] == 'lls' ? 'user' : session('user_type');
             $data = array('message' => '/'.$link.'/'.$_GET['sys'].'/dashboard', 'response' => true );
         }else {
             $data = array('message' => 'You are not Authorized', 'response' => false );

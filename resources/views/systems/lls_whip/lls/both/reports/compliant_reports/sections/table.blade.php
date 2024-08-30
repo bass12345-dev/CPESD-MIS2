@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table id="data-table-basic" class="table table-striped" >
+            <table id="data-table-basic1" class="table table-striped" >
                 <thead>
                     <tr>
                         <th>Establishment</th>

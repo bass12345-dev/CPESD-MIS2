@@ -272,6 +272,50 @@ class EstablishmentsController extends Controller
        
     }
 
+    //GENERATE REPORT
+    public function generate_compliant_report(Request $request){
+        $year = $request->input('date').'-01';
+        $data = $this->establishmentService->compliant_process($year);
+        return response()->json($data);
+        
+     }
 
+
+     function generate_survey(Request $request){
+        $id         = $request->input('id');
+        $date       = $request->input('date').'-01';
+        $data['inside'] = $this->employeeQuery->get_survey_inside($id,$date);
+        $data['outside'] = $this->employeeQuery->get_survey_outside($id,$date);
+        return $data;
+    }
+
+    function get_survey_employee_list(Request $request){
+        $id         = $request->input('id');
+        $date       = $request->input('date').'-01';
+        $items = $this->employeeQuery->QueryEstablishmentEmployeeList($id,$date);
+        $data = [];
+        foreach ($items as $row) {
+            $data[] = array(
+                'establishment_employee_id'     => $row->estab_emp_id,
+                'employee_id'                   => $row->employee_id,
+                'full_name'                     => $this->userService->user_full_name($row),
+                'full_address'                  => $this->userService->full_address($row),
+                'position'                      => $row->position,
+                'position_id'                   => $row->position_id,
+                'nature_of_employment'          => $row->nature_of_employment,
+                'status_id'                     => $row->employment_status_id,
+                'status_of_employment'          => $row->status,
+                'start_date'                    => $row->start_date == NULL ? '-' : Carbon::parse($row->start_date)->format('M Y'),
+                'end_date'                      => $row->end_date == NULL ? '-' : Carbon::parse($row->end_date)->format('M Y'),
+                'level_of_employment'           => $row->level_of_employment,
+                'gender'                        => $row->gender
+            );
+        }
+        return response()->json($data);
+      
+    }
+
+
+    
 
 }

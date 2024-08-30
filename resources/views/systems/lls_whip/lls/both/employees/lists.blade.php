@@ -1,4 +1,4 @@
-@extends('systems.lls_whip.lls.' . session('user_type') . '.layout.' . session('user_type') . '_master')
+@extends('systems.lls_whip.lls.user.layout.user_master')
 @section('title', $title)
 @section('content')
 <div class="notika-status-area">
