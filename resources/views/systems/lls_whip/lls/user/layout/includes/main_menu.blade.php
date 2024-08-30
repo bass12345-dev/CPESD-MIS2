@@ -14,6 +14,8 @@
                         </li>
                         <li><a data-toggle="tab" href="#employees" class="<?= $segments[2] == 'employees-record' ? 'active' : '' ?>"><i class="fas fa-users"></i>Employees Record</a>
                         </li>
+                        <li><a data-toggle="tab" href="#reports"><i class="fas fa-file"></i>Reports</a>
+                        </li>
                        
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -46,6 +48,14 @@
                         <div id="employees" class="tab-pane in <?= $segments[2] == 'employees-record' ? 'active' : '' ?>  notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="{{url('user/lls/employees-record')}}" class="<?= $segments[2] == 'employees-record' ? 'active' : '' ?>">Manage Employees Record</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div id="reports" class="tab-pane in  notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown active">
+                                <li><a href="{{url('user/lls/compliant-reports')}}">Compliant Reports</a>
                                 </li>
 
                             </ul>
