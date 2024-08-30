@@ -406,6 +406,7 @@ class EmployeeQuery
         'establishment_employee.level_of_employment as level_of_employment'
       )
       ->where('establishment_employee.establishment_id', $id)
+      ->where('establishment_employee.level_of_employment', 'rank_and_file')
       ->whereDate('establishment_employee.start_date', '<=', $date)
       ->orderBy('employees.first_name', 'asc')
       ->get();

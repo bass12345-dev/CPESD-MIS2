@@ -13,7 +13,7 @@
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        
+                                        <th></th>
                                         <th>Full Name</th>
                                         <th>Gender</th>
                                         <th>Address</th>
