@@ -32,7 +32,7 @@
 <script src="{{asset('lls_assets/js/plugins.js')}}"></script>
 <!--  Chat JS
 		============================================ -->
-<script src="{{asset('lls_assets/js/moment.min.js')}}"></script>
+<!-- <script src="{{asset('lls_assets/js/moment.min.js')}}"></script> -->
 
 <!-- main JS
 		============================================ -->
@@ -49,3 +49,4 @@
 <script src="{{asset('assets/js/yearpicker.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://jsuites.net/v4/jsuites.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>

@@ -40,7 +40,7 @@
         var cso = $('#select_cso option:selected').val();
         $('#completed_transactions_table').DataTable().destroy();
         generate_pmas_report(date_filter, filter_type_of_activity, cso);
-        if (cso != '') { } else { }
+        
     });
     $(document).on('click', 'button#close_pmas_report_section', function (e) {
         $('#generate_pmas_report_section').attr("hidden", true);

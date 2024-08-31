@@ -49,6 +49,8 @@
 <link rel="stylesheet" href="{{ asset('lls_assets/css/hamster.css')}}">
 <link rel="stylesheet" href="{{ asset('lls_assets/css/timeline.css')}}">
 <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <style>
 	.text-bold {
 		font-weight: 700;

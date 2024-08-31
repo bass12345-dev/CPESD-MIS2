@@ -214,26 +214,12 @@ class EstablishmentsController extends Controller
     public function get_establishment_employees(Request $request)
     {
         $id = $request->input('id');
-        $items = $this->employeeQuery->get_establishment_employee($id);
-        $data = [];
-        foreach ($items as $row) {
-            $data[] = array(
-                'establishment_employee_id'     => $row->estab_emp_id,
-                'employee_id'                   => $row->employee_id,
-                'full_name'                     => $this->userService->user_full_name($row),
-                'full_address'                  => $this->userService->full_address($row),
-                'position'                      => $row->position,
-                'position_id'                   => $row->position_id,
-                'nature_of_employment'          => $row->nature_of_employment,
-                'status_id'                     => $row->employment_status_id,
-                'status_of_employment'          => $row->status,
-                'start_date'                    => $row->start_date == NULL ? '-' : Carbon::parse($row->start_date)->format('M Y'),
-                'end_date'                      => $row->end_date == NULL ? '-' : Carbon::parse($row->end_date)->format('M Y'),
-                'level_of_employment'           => $row->level_of_employment,
-                'gender'                        => $row->gender
-            );
-        }
-        return response()->json($data);
+        $filter_date = $request->input('filter_date');
+        $resp = $this->establishmentService->establishment_employee($id,$filter_date);
+        return response()->json($resp);
+
+
+        
     }
 
 

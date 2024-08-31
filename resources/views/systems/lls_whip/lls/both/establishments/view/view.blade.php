@@ -9,7 +9,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
-                    <button class="btn btn-primary refresh-charts">Refresh</button>
+                    <button class="btn btn-primary refresh-charts">Refresh Charts</button>
                 </div>
                 <div class="row">@include('systems.lls_whip.lls.both.establishments.view.sections.gender_charts')</div>
                 <div class="row">@include('systems.lls_whip.lls.both.establishments.view.sections.positions_charts')</div>
@@ -32,7 +32,12 @@
         reload_graph();
     });
 
-    function reload_graph(){
+    $(document).on('click', 'button.reload-employee-table', function () {
+        $('#data-table-basic').DataTable().destroy();
+        filter_date_employee(date_filter = null);
+    });
+
+    function reload_graph() {
 
         loader();
         setTimeout(() => {
@@ -134,7 +139,7 @@
             _updatetAjax(url, form, table);
 
         }
-        reload_graph();
+        
 
     });
 
@@ -158,7 +163,7 @@
         }
     });
 
-    $('button#multi-delete').on('click', function() {
+    $('button#multi-delete').on('click', function () {
         var button_text = 'Delete selected items';
         var text = '';
         var url = '/user/act/lls/d-e-e';
@@ -172,155 +177,13 @@
         } else {
             delete_item(data, url, button_text, text, table);
             year_now = $('select#select_year :selected').val();
-           reload_graph();
+           
+           
         }
 
     });
 
 
-    $(document).ready(function () {
-        table = $('#data-table-basic').DataTable({
-            responsive: true,
-            ordering: false,
-            processing: true,
-            searchDelay: 500,
-            pageLength: 25,
-            language: {
-                "processing": '<div class="d-flex justify-content-center "><img class="top-logo mt-4" src="{{asset("assets/img/dts/peso_logo.png")}}"></div>'
-            },
-            "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
-                "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: datatables_buttons(),
-            ajax: {
-                url: base_url + "/user/act/lls/g-a-e-e",
-                method: 'POST',
-                data: {
-                    id: $('input[name=establishment_id]').val(),
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                dataSrc: "",
-                error: function (xhr, textStatus, errorThrown) {
-                    toast_message_error('Employees List is not displaying... Please Reload the Page')
-                }
-            },
-            columns: [{
-                data: 'establishment_employee_id'
-            },
-
-            {
-                data: null
-            },
-            {
-                data: null
-            },
-            {
-                data: 'full_address'
-            },
-            {
-                data: 'position'
-            },
-            {
-                data: null
-            },
-            {
-                data: 'status_of_employment'
-            },
-            {
-                data: 'start_date'
-            },
-            {
-                data: 'end_date'
-            },
-            {
-                data: null
-            },
-            {
-                data: null
-            },
-            ],
-            'select': {
-                'style': 'multi',
-            },
-            columnDefs: [{
-                'targets': 0,
-                'checkboxes': {
-                    'selectRow': true
-                }
-            },
-
-            {
-                targets: 1,
-                data: null,
-                orderable: false,
-                className: 'text-center',
-                render: function (data, type, row) {
-                    return '<a href="' + base_url + '/admin/lls/employee/' + row.employee_id +
-                        '">' + row.full_name + '</a>';
-
-                }
-            },
-            {
-                targets: 2,
-                data: null,
-                orderable: false,
-                className: 'text-center',
-                render: function (data, type, row) {
-                    return capitalizeFirstLetter(row.gender);
-
-                }
-            },
-
-            {
-                targets: 5,
-                data: null,
-                orderable: false,
-                className: 'text-center',
-                render: function (data, type, row) {
-                    return capitalizeFirstLetter(row.nature_of_employment);
-
-                }
-            },
-            {
-                targets: -2,
-                data: null,
-                orderable: false,
-                className: 'text-center',
-                render: function (data, type, row) {
-                    var result = row.level_of_employment.replaceAll('_', ' ');
-                    return capitalizeFirstLetter(result);
-
-                }
-            },
-
-            {
-                targets: -1,
-                data: null,
-                orderable: false,
-                className: 'text-center',
-                render: function (data, type, row) {
-                    //return '<button class="btn btn-success">Update</button> <button class="btn btn-success">Delete</button>';
-                    return '<div class="actions">\
-                                <div ><button class="btn btn-success update-establishment-employee" data-toggle="modal" data-target="#add_employee_modal" \
-                                data-id="' + row.establishment_employee_id + '"\
-                                data-employee-id="' + row.employee_id + '"\
-                                data-employee-name="' + row.full_name + '"\
-                                data-nature="' + row.nature_of_employment + '"\
-                                data-position="' + row.position_id + '"\
-                                data-status="' + row.status_id + '"\
-                                data-start="' + row.start_date + '"\
-                                data-end="' + row.end_date + '"\
-                                data-level="' + row.level_of_employment + '"\
-                                ><i class="fas fa-pen"></i></button> </div>\
-                                </div>\
-                                ';
-                }
-            }
-            ]
-
-        });
-    });
 
 
     function load_gender_inside_chart() {
@@ -445,9 +308,182 @@
         load_gender_outside_chart();
         load_gender_inside_chart();
         load_positions_chart();
+        filter_date_employee(date_filter=null);
     });
 
-    
+    $(function () {
+        $('input[name="daterange_filter"]').daterangepicker({
+            opens: 'right',
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            format: 'YYYY-MM-DD'
+        }, function (start, end, label) { });
+    });
+
+    $(document).on('click', 'button#submit-filter', function (e) {
+        var date_filter = $('input[name="daterange_filter"]').val();
+        $('#data-table-basic').DataTable().destroy();
+        filter_date_employee(date_filter);
+
+    });
+
+    function filter_date_employee(date_filter) {
+
+        $(document).ready(function () {
+            table = $('#data-table-basic').DataTable({
+                responsive: true,
+                ordering: false,
+                processing: true,
+                searchDelay: 500,
+                pageLength: 25,
+                language: {
+                    "processing": '<div class="d-flex justify-content-center "><img class="top-logo mt-4" src="{{asset("assets/img/dts/peso_logo.png")}}"></div>'
+                },
+                "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: datatables_buttons(),
+                ajax: {
+                    url: base_url + "/user/act/lls/g-a-e-e",
+                    method: 'POST',
+                    data: {
+                        id: $('input[name=establishment_id]').val(),
+                        filter_date : date_filter
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    dataSrc: "",
+                    error: function (xhr, textStatus, errorThrown) {
+                        toast_message_error('Employees List is not displaying... Please Reload the Page')
+                    }
+                },
+                columns: [{
+                    data: 'establishment_employee_id'
+                },
+
+                {
+                    data: null
+                },
+                {
+                    data: null
+                },
+                {
+                    data: 'full_address'
+                },
+                {
+                    data: 'position'
+                },
+                {
+                    data: null
+                },
+                {
+                    data: 'status_of_employment'
+                },
+                {
+                    data: 'start_date'
+                },
+                {
+                    data: 'end_date'
+                },
+                {
+                    data: null
+                },
+                {
+                    data: null
+                },
+                ],
+                'select': {
+                    'style': 'multi',
+                },
+                columnDefs: [{
+                    'targets': 0,
+                    'checkboxes': {
+                        'selectRow': true
+                    }
+                },
+
+                {
+                    targets: 1,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function (data, type, row) {
+                        return '<a href="' + base_url + '/admin/lls/employee/' + row.employee_id +
+                            '">' + row.full_name + '</a>';
+
+                    }
+                },
+                {
+                    targets: 2,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function (data, type, row) {
+                        return capitalizeFirstLetter(row.gender);
+
+                    }
+                },
+
+                {
+                    targets: 5,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function (data, type, row) {
+                        return capitalizeFirstLetter(row.nature_of_employment);
+
+                    }
+                },
+                {
+                    targets: -2,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function (data, type, row) {
+                        var result = row.level_of_employment.replaceAll('_', ' ');
+                        return capitalizeFirstLetter(result);
+
+                    }
+                },
+
+                {
+                    targets: -1,
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function (data, type, row) {
+                        //return '<button class="btn btn-success">Update</button> <button class="btn btn-success">Delete</button>';
+                        return '<div class="actions">\
+                                <div ><button class="btn btn-success update-establishment-employee" data-toggle="modal" data-target="#add_employee_modal" \
+                                data-id="' + row.establishment_employee_id + '"\
+                                data-employee-id="' + row.employee_id + '"\
+                                data-employee-name="' + row.full_name + '"\
+                                data-nature="' + row.nature_of_employment + '"\
+                                data-position="' + row.position_id + '"\
+                                data-status="' + row.status_id + '"\
+                                data-start="' + row.start_date + '"\
+                                data-end="' + row.end_date + '"\
+                                data-level="' + row.level_of_employment + '"\
+                                ><i class="fas fa-pen"></i></button> </div>\
+                                </div>\
+                                ';
+                    }
+                }
+                ]
+
+            });
+        });
+
+
+    }
+
+
 
 </script>
 

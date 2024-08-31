@@ -143,6 +143,47 @@ class EmployeeQuery
   }
 
 
+  public function QueryEstablishmentFilterDate($id,$start,$end){
+
+      $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+      ->leftJoin('employees', 'employees.employee_id', '=', 'establishment_employee.employee_id')
+      ->leftJoin('positions', 'positions.position_id', '=', 'establishment_employee.position_id')
+      ->leftJoin('employment_status', 'employment_status.employment_status_id', '=', 'establishment_employee.status_of_employment_id')
+      ->select(
+        'establishment_employee.employee_id as estab_emp_id',
+        //User
+        'employees.first_name as first_name',
+        'employees.middle_name as middle_name',
+        'employees.last_name as last_name',
+        'employees.extension as extension',
+        'employees.province as province',
+        'employees.city as city',
+        'employees.barangay as barangay',
+        'employees.street as street',
+        'employees.gender as gender',
+        //Position
+        'positions.position_id as position_id',
+        'positions.position as position',
+        //Status
+        'employment_status.employment_status_id as employment_status_id',
+        'employment_status.status as status',
+        //Nature of Employment
+        'establishment_employee.employee_id as employee_id',
+        'establishment_employee.nature_of_employment as nature_of_employment',
+        'establishment_employee.start_date as start_date',
+        'establishment_employee.end_date as end_date',
+        'establishment_employee.level_of_employment as level_of_employment'
+      )
+      ->where('establishment_employee.establishment_id', $id)
+      ->whereRaw("DATE_FORMAT(establishment_employee.start_date,'%Y-%m-%d') >= '" .  date('Y-m-d', strtotime($start)) . "' ")
+      ->whereRaw("DATE_FORMAT(establishment_employee.start_date,'%Y-%m-%d') <= '" .  date('Y-m-d', strtotime($end)) . "'")
+      ->orderBy('employees.first_name', 'asc')
+      ->get();
+
+    return $rows;
+
+  }
+
 
 
   //DASHBOARD DISPLAY

@@ -4,6 +4,7 @@ namespace App\Services\lls;
 
 use App\Repositories\CustomRepository;
 use App\Repositories\lls\EmployeeQuery;
+use App\Services\user\UserService;
 use Carbon\Carbon;
 
 class EstablishmentService
@@ -15,18 +16,53 @@ class EstablishmentService
     protected $establishment_employee_table;
     protected $est_employee_table;
     protected $employeeQuery;
+    protected $userService;
     protected $survey_table;
     protected $default_city;
-    public function __construct(CustomRepository $customRepository, EmployeeQuery $employeeQuery){
+    public function __construct(CustomRepository $customRepository, EmployeeQuery $employeeQuery , UserService $userService){
         $this->conn                 = config('custom_config.database.lls_whip');
         $this->customRepository     = $customRepository;
         $this->establishments_table = 'establishments';
         $this->survey_table         = 'survey';
         $this->establishment_employee_table = 'establishment_employee';
         $this->employeeQuery        = $employeeQuery;
+        $this->userService          = $userService;
         $this->default_city         = '1004209000-City of Oroquieta';
         $this->est_employee_table   = 'establishment_employee';
 
+    }
+
+    //GET Establishment Employee
+
+    public function establishment_employee($id,$date_filter){
+        $items = '';
+        if($date_filter == null) {
+            $items = $this->employeeQuery->get_establishment_employee($id);
+        }else {
+            $start = explode(" - ", $date_filter)[0];
+            $end = explode(" - ", $date_filter)[1];
+            $items = $this->employeeQuery->QueryEstablishmentFilterDate($id,$start,$end);
+        }
+         $data = [];
+        foreach ($items as $row) {
+            $data[] = array(
+                'establishment_employee_id'     => $row->estab_emp_id,
+                'employee_id'                   => $row->employee_id,
+                'full_name'                     => $this->userService->user_full_name($row),
+                'full_address'                  => $this->userService->full_address($row),
+                'position'                      => $row->position,
+                'position_id'                   => $row->position_id,
+                'nature_of_employment'          => $row->nature_of_employment,
+                'status_id'                     => $row->employment_status_id,
+                'status_of_employment'          => $row->status,
+                'start_date'                    => $row->start_date == NULL ? '-' : Carbon::parse($row->start_date)->format('M Y'),
+                'end_date'                      => $row->end_date == NULL ? '-' : Carbon::parse($row->end_date)->format('M Y'),
+                'level_of_employment'           => $row->level_of_employment,
+                'gender'                        => $row->gender
+            );
+        }
+
+        return $data;
     }
     
 
