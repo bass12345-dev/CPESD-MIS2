@@ -143,9 +143,10 @@ class EmployeeQuery
   }
 
 
-  public function QueryEstablishmentFilterDate($id,$start,$end){
+  public function QueryEstablishmentFilterDate($id, $start, $end)
+  {
 
-      $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
       ->leftJoin('employees', 'employees.employee_id', '=', 'establishment_employee.employee_id')
       ->leftJoin('positions', 'positions.position_id', '=', 'establishment_employee.position_id')
       ->leftJoin('employment_status', 'employment_status.employment_status_id', '=', 'establishment_employee.status_of_employment_id')
@@ -181,7 +182,6 @@ class EmployeeQuery
       ->get();
 
     return $rows;
-
   }
 
 
@@ -452,6 +452,69 @@ class EmployeeQuery
       ->orderBy('employees.first_name', 'asc')
       ->get();
 
+    return $rows;
+  }
+
+  public function QueryPositionsCount()
+  {
+    $rows = DB::connection($this->conn)->table('positions as positions')
+      ->leftJoin('establishment_employee', 'establishment_employee.position_id', '=', 'positions.position_id')
+      ->select(
+        'positions.position as position',
+        DB::raw('COUNT(establishment_employee.position_id) as c'),
+      )
+      ->groupBy('establishment_employee.position_id')
+      ->where('positions.type', 'lls')
+      ->where('establishment_employee.end_date', '=', NULL)
+      ->where('establishment_employee.level_of_employment', '=', 'rank_and_file')
+      ->get();
+    return $rows;
+  }
+
+  public function QueryEstablishmentEmployeeTotal()
+  {
+
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+      ->where('establishment_employee.end_date', '=', NULL)
+      ->where('establishment_employee.level_of_employment', '=', 'rank_and_file')
+      ->count();
+    return $rows;
+  }
+
+
+  public function QueryGenderInside()
+  {
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+      ->leftJoin('employees', 'employees.employee_id', '=', 'establishment_employee.employee_id')
+      ->select(
+
+        //Employee
+        'employees.gender as gender',
+        DB::raw('COUNT(employees.gender) as g'),
+      )
+      ->where('employees.city', $this->default_city)
+      ->where('establishment_employee.level_of_employment', '=', 'rank_and_file')
+      ->where('establishment_employee.end_date', '=', NULL)
+      ->groupBy('employees.gender')
+      ->get();
+    return $rows;
+  }
+
+  public function QueryGenderOutside()
+  {
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+      ->leftJoin('employees', 'employees.employee_id', '=', 'establishment_employee.employee_id')
+      ->select(
+
+        //Employee
+        'employees.gender as gender',
+        DB::raw('COUNT(employees.gender) as g'),
+      )
+      ->where('employees.city', '!=', $this->default_city)
+      ->where('establishment_employee.level_of_employment', '=', 'rank_and_file')
+      ->where('establishment_employee.end_date', '=', NULL)
+      ->groupBy('employees.gender')
+      ->get();
     return $rows;
   }
 }

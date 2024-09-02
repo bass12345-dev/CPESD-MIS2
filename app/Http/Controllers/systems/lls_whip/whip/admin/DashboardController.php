@@ -75,15 +75,19 @@ class DashboardController extends Controller
     {
 
         $res            = $this->contractorQuery->QueryWorkersInsideOutside();
-        $label          = [];
-        $total          = [];
-        foreach ($res as $tempKey => $row) {
-            array_push($label, $tempKey);
-            array_push($total, $row);
+        $label          = ['male','female'];
+        $arr_male       = [];
+        $arr_female     = [];
+        foreach ($res as $key => $value) {
+           if($label[0] == $value->gender){
+            array_push($arr_male,$key);
+           }else {
+            array_push($arr_female,$key);
+           }
         }
-
-        $data['label']   = $label;
-        $data['total']   = $total;
+        
+        $data['label']          = $label;
+        $data['total']   = array(count($arr_male),count($arr_female));
         $data['color']   = ['#2E236C', '#684B49'];
         return response()->json($data);
     }

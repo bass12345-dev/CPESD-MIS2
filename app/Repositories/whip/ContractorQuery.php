@@ -61,12 +61,16 @@ class ContractorQuery
 
     public function QueryWorkersInsideOutside(){
 
-        $rows = DB::connection($this->conn)->table('employees as employees')
-          ->select(
-            DB::raw('COUNT(IF(employees.city != "'.$this->default_city.'", 1, NULL)) as outside'),
-            DB::raw('COUNT(IF(employees.city = "'.$this->default_city.'", 1, NULL)) as inside'),
-          )
-          ->first();
+        $rows = DB::connection($this->conn)->table('project_employee as project_employee')
+        ->leftJoin('employees', 'employees.employee_id', '=', 'project_employee.employee_id')
+        //   ->select(
+            
+        //     DB::raw('COUNT(IF(employees.city != "'.$this->default_city.'", 1, NULL)) as outside'),
+        //     DB::raw('COUNT(IF(employees.city = "'.$this->default_city.'", 1, NULL)) as inside'),
+        //   )
+          
+          ->groupBy('project_employee.employee_id')
+          ->get();
         return $rows;
     }
 

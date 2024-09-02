@@ -201,6 +201,10 @@ Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
 //USER ACTION LLS_WHIP
 Route::middleware([SessionGuard::class])->prefix('/user/act')->group(function () {
                                  //LABOR LOCALIZATION
+
+      //Dashboard
+      Route::get("/lls/g-g-i",[App\Http\Controllers\systems\lls_whip\lls\user\DashboardController::class, 'get_gender_inside']);
+      Route::get("/lls/g-g-o",[App\Http\Controllers\systems\lls_whip\lls\user\DashboardController::class, 'get_gender_outside']);
       //POSITIONS
       Route::get("/lls/a-p",[App\Http\Controllers\systems\lls_whip\both\PositionsController::class, 'get_all_lls_positions']);
       Route::post("/lls/i-u-p",[App\Http\Controllers\systems\lls_whip\both\PositionsController::class, 'insert_update_position_lls']);
