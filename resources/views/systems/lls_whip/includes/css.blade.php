@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="{{ asset('lls_assets/css/main.css')}}">
 <!-- style CSS
 		============================================ -->
-<link rel="stylesheet" href="{{ asset('lls_assets/css/lls1.css')}}">
+<link rel="stylesheet" href="{{ asset('lls_assets/css/lls2.css')}}">
 <!-- responsive CSS
 		============================================ -->
 <link rel="stylesheet" href="{{ asset('lls_assets/css/responsive.css')}} ">
@@ -43,7 +43,7 @@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/yearpicker@0.2.0/lib/YearPicker.min.css" rel="stylesheet">
 <link href="{{asset('assets/css/yearpicker.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('lls_assets/css/additional.css')}}">
+<link rel="stylesheet" href="{{ asset('lls_assets/css/additional1.css')}}">
 <link rel="stylesheet" href="{{ asset('lls_assets/css/messages.css')}}">
 <link rel="stylesheet" href="{{ asset('lls_assets/css/messages2.css')}}">
 <link rel="stylesheet" href="{{ asset('lls_assets/css/hamster.css')}}">

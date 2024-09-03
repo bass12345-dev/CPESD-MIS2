@@ -2654,7 +2654,7 @@ hr {
     border-bottom: 0px solid #ddd;
 }
 .table.table-cl>tbody>tr.active>td, .table.table-cl>tbody>tr.active>th, .table.table-cl>tbody>tr>td.active, .table.table-cl>tbody>tr>th.active, .table.table-cl>tfoot>tr.active>td, .table.table-cl>tfoot>tr.active>th, .table.table-cl>tfoot>tr>td.active, .table.table-cl>tfoot>tr>th.active, .table.table-cl>thead>tr.active>td, .table.table-cl>thead>tr.active>th, .table.table-cl>thead>tr>td.active, .table.table-cl>thead>tr>th.active{
-	background:#222E3C !important;
+	/* background:#222E3C !important; */
 	color:#fff !important;
 }
 .table.table-cl>tbody>tr.info>td, .table.table-cl>tbody>tr.info>th, .table.table-cl>tbody>tr>td.info, .table.table-cl>tbody>tr>th.info, .table.table-cl>tfoot>tr.info>td, .table.table-cl>tfoot>tr.info>th, .table.table-cl>tfoot>tr>td.info, .table.table-cl>tfoot>tr>th.info, .table.table-cl>thead>tr.info>td, .table.table-cl>thead>tr.info>th, .table.table-cl>thead>tr>td.info, .table.table-cl>thead>tr>th.info{
@@ -2662,7 +2662,7 @@ hr {
 	color:#fff;
 }
 .table.table-cl>tbody>tr.warning>td, .table.table-cl>tbody>tr.warning>th, .table.table-cl>tbody>tr>td.warning, .table.table-cl>tbody>tr>th.warning, .table.table-cl>tfoot>tr.warning>td, .table.table-cl>tfoot>tr.warning>th, .table.table-cl>tfoot>tr>td.warning, .table.table-cl>tfoot>tr>th.warning, .table.table-cl>thead>tr.warning>td, .table.table-cl>thead>tr.warning>th, .table.table-cl>thead>tr>td.warning, .table.table-cl>thead>tr>th.warning{
-	background:#222E3C !important;
+	/* background:#222E3C !important; */
 	color:#fff !important;
 }
 .table.table-cl>tbody>tr.danger>td, .table.table-cl>tbody>tr.danger>th, .table.table-cl>tbody>tr>td.danger, .table.table-cl>tbody>tr>th.danger, .table.table-cl>tfoot>tr.danger>td, .table.table-cl>tfoot>tr.danger>th, .table.table-cl>tfoot>tr>td.danger, .table.table-cl>tfoot>tr>th.danger, .table.table-cl>thead>tr.danger>td, .table.table-cl>thead>tr.danger>th, .table.table-cl>thead>tr>td.danger, .table.table-cl>thead>tr>th.danger{
@@ -2749,7 +2749,7 @@ hr {
     content: '\e91e';
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:focus, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    background: #222E3C !important;
+    /* background: #222E3C !important; */
     color: #fff!important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -2767,7 +2767,7 @@ hr {
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
     color: #fff !important;
     border: 0px solid #ccc;
-    background: #222E3C !important;
+    /* background: #222E3C !important; */
 }
 #data-table-basic {
     padding: 20px 0px;

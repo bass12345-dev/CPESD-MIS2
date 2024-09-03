@@ -5,7 +5,7 @@
                 <div class="panel panel-primary">
                     <ul class="list-group">
                         <a href="#" class="list-group-item active">
-                            Establishment Positions
+                            Employed
                         </a>
                         <?php foreach ($employee_positions as $row): ?>
                             <li class="list-group-item">
