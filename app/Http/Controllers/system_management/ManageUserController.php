@@ -49,8 +49,41 @@ class ManageUserController extends Controller
                 'phone_number' => $key->contact_number,
                 'status' => $key->user_status
             );
-
         }
+        return response()->json($data);
+    }
+
+    public function change_user_status(Request $request)
+    {
+        $id = $request->input('id');
+        $items = array(
+            'user_status' => $request->input('status')
+        );
+
+        $update = $this->customRepository->update_item($this->conn, $this->user_table, array('user_id' => $id), $items);
+        if ($update) {
+
+            $data = array('message' => 'Status Updated Successfully', 'response' => true);
+        } else {
+
+            $data = array('message' => 'Error', 'response' => false);
+        }
+
+        return response()->json($data);
+    }
+
+    public function delete_user(Request $request)
+    {
+        $id = $request->input('id');
+        $delete = $this->customRepository->delete_item($this->conn,$this->user_table, array('user_id' => $id));
+
+        if ($delete) {
+
+            $data = array('message' => 'Deleted Succesfully', 'response' => true);
+        } else {
+            $data = array('message' => 'Error', 'response' => false);
+        }
+
         return response()->json($data);
     }
 
@@ -58,25 +91,24 @@ class ManageUserController extends Controller
     {
         $row = $this->customRepository->q_get_where($this->conn, array('user_id' => $id), $this->user_table);
 
-        if($row->count() > 0) {
+        if ($row->count() > 0) {
             $user_row = $row->first();
             $data['title'] = $this->userService->user_full_name($user_row);
             $data['user'] = $user_row;
             $data['systems'] = $this->user_system_authorized($id);
             return view('system_management.contents.manage_users.view_profile.view_profile')->with($data);
-        }else {
+        } else {
             echo 404;
         }
-
-   
     }
 
-    private function user_system_authorized($id){
-        
+    private function user_system_authorized($id)
+    {
+
         $systems = config('custom_config._systems');
         $data = [];
         foreach ($systems as $key => $value) {
-            $user_row = $this->customRepository->q_get_where($this->conn,array('system_authorized' => $key,'user_id' => $id), $this->user_system_authorized_table)->count();
+            $user_row = $this->customRepository->q_get_where($this->conn, array('system_authorized' => $key, 'user_id' => $id), $this->user_system_authorized_table)->count();
             $data[] = array(
                 'system_id'     => $key,
                 'system_name'   => $value,
@@ -108,22 +140,19 @@ class ManageUserController extends Controller
             $data = array('message' => 'Removed Succesfully', 'response' => true);
         }
         return response()->json($data);
-
-
     }
 
 
-    public function check_authorized(){
-        
-        $count = $this->customRepository->q_get_where($this->conn,array('system_authorized' => $_GET['sys'],'user_id' => session('user_id')),$this->user_system_authorized_table)->count();
-        if($count || session('user_type') == 'admin') {
+    public function check_authorized()
+    {
+
+        $count = $this->customRepository->q_get_where($this->conn, array('system_authorized' => $_GET['sys'], 'user_id' => session('user_id')), $this->user_system_authorized_table)->count();
+        if ($count || session('user_type') == 'admin') {
             $link = $_GET['sys'] == 'cso' || $_GET['sys'] == 'dts' || $_GET['sys'] == 'lls' ? 'user' : session('user_type');
-            $data = array('message' => '/'.$link.'/'.$_GET['sys'].'/dashboard', 'response' => true );
-        }else {
-            $data = array('message' => 'You are not Authorized', 'response' => false );
+            $data = array('message' => '/' . $link . '/' . $_GET['sys'] . '/dashboard', 'response' => true);
+        } else {
+            $data = array('message' => 'You are not Authorized', 'response' => false);
         }
         return response()->json($data);
-
     }
-
 }

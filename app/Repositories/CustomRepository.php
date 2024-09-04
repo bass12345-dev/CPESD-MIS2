@@ -38,7 +38,14 @@ class CustomRepository
     }
 
 
-    
+    public function isEmailUnique($email)
+    {
+        return DB::table('users')->where('email_address', $email)->doesntExist();
+    }
+    public function isUsernameUnique($email)
+    {
+        return DB::table('users')->where('username', $email)->doesntExist();
+    }
 
     
 }

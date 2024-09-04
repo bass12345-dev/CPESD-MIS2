@@ -29,7 +29,7 @@ class UserService
     }
     
 
-    //REGISTER USER
+    //LOGIN USER
     public function LoginUser(array $auth)
     {
         $response = array();
@@ -114,6 +114,40 @@ class UserService
                 'is_oic'            => $user_row->is_oic == 'yes' ? true : false
             )
         );
+    }
+
+
+
+    //REGISTER USER
+    public function registerUser(array $userData)
+    {
+
+        if ($this->customRepository->isEmailUnique($userData['email_address']) && $this->customRepository->isUsernameUnique($userData['username'])) {
+
+            $items = array(
+                'first_name' => $userData['first_name'],
+                'last_name' => $userData['last_name'],
+                'middle_name' => $userData['middle_name'],
+                'extension' => $userData['extension'],
+                'address' => $userData['address'],
+                'contact_number' => $userData['contact_number'],
+                'email_address' => $userData['email_address'],
+                'username' => $userData['username'],
+                'password' => password_hash($userData['password'], PASSWORD_DEFAULT),
+                'off_id' => $userData['office'],
+                'user_created' => Carbon::now()->format('Y-m-d H:i:s'),
+                'user_status' => 'inactive',
+                'work_status' => NULL,
+                'user_type' => 'user',
+                'is_receiver' => 'no',
+                'is_oic' => 'no',
+            );
+            $user = $this->customRepository->insert_item($this->conn,$this->user_table, $items);
+            return $user;
+        }
+
+        // Handle duplicate email scenario
+        return null;
     }
 
     private function store_login_history($user_row){

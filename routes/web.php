@@ -15,9 +15,19 @@ Route::get('/', function () {
    $data['title'] = 'CPESD MIS LOGIN';
    return view('system_auth.login')->with($data);
 })->middleware(UserLoginCheck::class);
+//Register View
+Route::get('/register', function () {
+   $data['title'] = 'CPESD MIS REGISTER';
+   $data['barangay'] = config('custom_config.barangay');
+   return view('system_auth.register')->with($data);
+})->middleware(UserLoginCheck::class);
+
 //Auth Login Action
 Route::post('/v-u', [App\Http\Controllers\auth\AuthController::class, 'verify_user']);
 Route::get('/logout', [App\Http\Controllers\auth\AuthController::class, 'logout']);
+
+//Register Action
+Route::post('/register', [App\Http\Controllers\auth\AuthController::class, 'register_user']);
 
 
 Route::get('/home', function () {
@@ -44,6 +54,8 @@ Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm
    Route::get("/g-a-l-l",[ App\Http\Controllers\system_management\LoginHistoryController::class, 'get_all_login_logs']);
    //Manage User
    Route::get("/g-a-u",[ App\Http\Controllers\system_management\ManageUserController::class, 'get_all_users']);
+   Route::post("/c-u-s",[ App\Http\Controllers\system_management\ManageUserController::class, 'change_user_status']);
+   Route::post("/delete-user",[ App\Http\Controllers\system_management\ManageUserController::class, 'delete_user']);
    //System Authorization
    Route::post("/a-s",[ App\Http\Controllers\system_management\ManageUserController::class, 'authorize_system']);
 
