@@ -2,7 +2,7 @@
     <div class="card flex-fill p-3">
         <div class="card-header">
             <h5 class="card-title mb-0">Project Monitoring Information</h5>
-            <h5 class="card-title mb-0">Monitoring #</h5>
+            <h5 class="card-title mb-0">Monitoring #{{$row->whip_code}}</h5>
             <button class="btn btn-primary edit-information" disabled>Edit Info</button>
             <button class="btn btn-danger cancel-edit hidden" >Cancel Edit</button>
             <button class="btn btn-success submit hidden" >Submit</button>

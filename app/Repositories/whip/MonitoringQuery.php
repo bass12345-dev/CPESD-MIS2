@@ -41,6 +41,7 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
 
         //Projects
         'projects.project_id as project_id',
@@ -66,7 +67,6 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
 
   public function QueryMyApprovedMonitoring()
@@ -87,6 +87,7 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
 
         //Projects
         'projects.project_id as project_id',
@@ -113,7 +114,6 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
 
   public function QueryMyApprovedMonitoringByMonth($month, $year)
@@ -134,6 +134,7 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
 
         //Projects
         'projects.project_id as project_id',
@@ -162,7 +163,6 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
 
   //admin
@@ -185,6 +185,8 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
+
 
         //Projects
         'projects.project_id as project_id',
@@ -209,7 +211,6 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
 
   //Approved Monitoring Projects
@@ -232,6 +233,7 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
 
         //Projects
         'projects.project_id as project_id',
@@ -257,7 +259,6 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
 
   public function QueryApprovedMonitoringByMonth($month, $year)
@@ -278,6 +279,7 @@ class MonitoringQuery
         'project_monitoring.specific_activity as specific_activity',
         'project_monitoring.monitoring_status as monitoring_status',
         'project_monitoring.project_monitoring_id as project_monitoring_id',
+        'project_monitoring.whip_code as whip_code',
 
         //Projects
         'projects.project_id as project_id',
@@ -305,10 +307,7 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
-
-
 
   public function QueryRemarks($id)
   {
@@ -316,9 +315,9 @@ class MonitoringQuery
     $rows = DB::table($this->lls_whip_table_name . '.remarks as remarks')
       ->leftJoin($this->users_table_name . '.users', 'users.user_id', '=', 'remarks.user_id')
       ->select(
-       //Remarks
-       'remarks.remarks as remarks',
-       'remarks.user_id as user_id',
+        //Remarks
+        'remarks.remarks as remarks',
+        'remarks.user_id as user_id',
         //User
         'users.user_type as user_type',
         'users.first_name as first_name',
@@ -332,11 +331,7 @@ class MonitoringQuery
       ->get();
 
     return $rows;
-
   }
-
-
-
 
   public function get_whip_monitoring_where_and_year_and_month($where, $year, $m)
   {
@@ -345,8 +340,11 @@ class MonitoringQuery
   }
 
 
-
-
-
-
+  public function get_whip_code($where)
+  {
+    $row = DB::connection($this->conn)->table('project_monitoring')
+      ->whereYear('created_on', '=', $where)
+      ->orderBy('created_on', 'desc');
+    return $row;
+  }
 }

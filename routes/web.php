@@ -271,6 +271,8 @@ Route::middleware([SessionGuard::class])->prefix('/user/act')->group(function ()
          Route::post("/whip/i-u-p-e",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'insert_update_project_employee']);
          Route::post("/whip/g-a-p-e",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'get_all_project_employee']);
          Route::post("/whip/d-p-e",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'delete_project_employee']);
+      //Whip Code
+         Route::get("/whip/g-w-c",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'get_whip_code']);
       
       //Remarks
          Route::post("/whip/add-remarks",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'add_remarks']);

@@ -160,6 +160,7 @@ class ProjectQuery
                     'project_monitoring.annotations as annotations',
                     'project_monitoring.monitoring_status as monitoring_status',
                     'project_monitoring.project_monitoring_id as project_monitoring_id',
+                    'project_monitoring.whip_code as whip_code',
 
                     //Projects
                     'projects.project_id as project_id',

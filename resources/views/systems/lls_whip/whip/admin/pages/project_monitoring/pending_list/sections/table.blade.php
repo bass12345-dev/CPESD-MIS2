@@ -15,6 +15,7 @@
                                     <tr>
                                         <th></th>
                                         <th>#</th>
+                                        <th>WHIP Code</th>
                                         <th>Project</th>
                                         <th>Contractor</th>
                                         <th>Address</th>

@@ -44,6 +44,7 @@ class MonitoringService
                      'i'                             => $i++,
                      'project_monitoring_id'         => $row->project_monitoring_id,
                      'project_title'                 => $row->project_title,
+                     'whip_code'                     => $row->whip_code,
                      'date_of_monitoring'            => date('M d Y ', strtotime($row->date_of_monitoring)),
                      'specific_activity'             => $row->specific_activity,
                      'monitoring_status'             => $row->monitoring_status,

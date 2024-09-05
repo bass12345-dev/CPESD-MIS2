@@ -73,6 +73,7 @@ class MonitoringController extends Controller
              $data[] = array(
                       'i'                             => $i++,
                       'project_monitoring_id'         => $row->project_monitoring_id,
+                      'whip_code'                     => $row->whip_code,
                       'project_title'                 => $row->project_title,
                       'date_of_monitoring'            => date('M d Y ', strtotime($row->date_of_monitoring)),
                       'specific_activity'             => $row->specific_activity,

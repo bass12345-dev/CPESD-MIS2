@@ -97,6 +97,7 @@ class MonitoringController extends Controller
     
         $items = array(
             'project_id'            => $request->input('project_id'),
+            'whip_code'             => $request->input('whip_code'),
             'date_of_monitoring'    => $request->input('date_of_monitoring'),
             'specific_activity'     => $request->input('specific_activity'),
             'annotations'           => $request->input('annotations'),
@@ -181,6 +182,51 @@ class MonitoringController extends Controller
 
     //READ
 
+    public function get_whip_code(){
+        
+       #define reference number variable
+       $whip_number = '';
+
+       #count rfa added in database
+       $count_whip = $this->customRepository->q_get($this->conn, 'project_monitoring')->count();
+
+       #get current year
+       $current_year = date('Y', time());
+
+       #ymd format = Year Month Day
+       $ymd_format = date('Y-m-d', time());
+        
+       $add_str = date('Ymd', time());
+
+       #CONDITION
+
+       if ($count_whip) {
+
+             $last_created = date('Y', strtotime($this->customRepository->q_get_order($this->conn, 'project_monitoring', 'created_on', 'desc')->first()->created_on));
+
+             if ($current_year > $last_created) {
+
+                   $whip_number = $add_str.'001';
+
+             } else if ($current_year < $last_created) {
+                   $last_pmas_number_add_one = $this->monitoringQuery->get_whip_code($ymd_format)->first()->whip_code + 1;
+                   $whip_number = $add_str.$this->customService->put_zeros_p_r($last_pmas_number_add_one);
+
+             } else if ($current_year === $last_created) {
+                   $last_pmas_number_add_one = $this->monitoringQuery->get_whip_code($current_year)->first()->whip_code + 1;
+                   $whip_number = $add_str.$this->customService->put_zeros_p_r($last_pmas_number_add_one);
+
+             }
+
+       } else {
+
+             $whip_number = $add_str.'001';
+       }
+
+       echo $whip_number;
+
+    }
+
     public function get_my_approved_project_monitoring(){
         
             $month = '';
@@ -255,6 +301,7 @@ class MonitoringController extends Controller
            $data[] = array(
                     'i'                             => $i++,
                     'project_monitoring_id'         => $row->project_monitoring_id,
+                    'code'                          => $row->whip_code,
                     'project_title'                 => $row->project_title,
                     'date_of_monitoring'            => date('M d Y ', strtotime($row->date_of_monitoring)),
                     'specific_activity'             => $row->specific_activity,

@@ -35,6 +35,9 @@
                 data: 'i'
             },
             {
+                data: 'i'
+            },
+            {
                 data: 'project_title'
             },
             {
@@ -71,6 +74,13 @@
             },
             {
                 targets: 2,
+                data: null,
+                render: function (data, type, row) {
+                    return row.code;
+                }
+            },
+            {
+                targets: 3,
                 data: null,
                 render: function (data, type, row) {
                     return '<a href="' + base_url + '/user/whip/project-monitoring-info/' + row.project_monitoring_id + '" data-toggle="tooltip" data-placement="top" title="View ' + row.project_title + '">' + row.project_title + '</a>';

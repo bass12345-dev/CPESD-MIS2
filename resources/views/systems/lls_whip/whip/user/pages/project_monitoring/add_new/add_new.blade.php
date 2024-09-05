@@ -61,5 +61,41 @@
 
     });
 
+
+    function tracking_number() {
+      var url = "/user/act/whip/g-w-c";
+      $.ajax({
+         url: base_url + url,
+         method: 'GET',
+         dataType: 'text',
+         beforeSend: function() {
+            loader();
+         },
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+         },
+         success: function(data) {
+            JsLoadingOverlay.hide();
+            if (data) {
+               $('input[name=whip_code]').val(data);
+            } else {
+               alert('Failed to load WHIP Code Please Contact the Develope');
+               setTimeout(reload_page, 2000)
+            }
+         },
+         error: function() {
+            alert('Failed to load WHIP Code Please Contact the Developer');
+            // location.reload();
+            JsLoadingOverlay.hide();
+         }
+
+      });
+
+   }
+
+   $(document).ready(function() {
+      tracking_number();
+   })
+
 </script>
 @endsection

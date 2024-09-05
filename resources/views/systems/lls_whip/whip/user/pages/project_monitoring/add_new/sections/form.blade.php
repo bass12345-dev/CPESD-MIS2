@@ -14,6 +14,20 @@
                                         <i class="notika-icon notika-edit"></i>
                                     </div>
                                     <div class="nk-int-st">
+                                        <label>WHIP CODE</label>
+                                        <input type="text" class="form-control" name="whip_code"
+                                            placeholder="WHIP_CODE" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group ic-cmp-int">
+                                    <div class="form-ic-cmp">
+                                        <i class="notika-icon notika-edit"></i>
+                                    </div>
+                                    <div class="nk-int-st">
                                         <input type="hidden" class="form-control" name="project_id"
                                             placeholder="Search Project Title" required>
                                         <input type="text" class="form-control" name="project_title"
