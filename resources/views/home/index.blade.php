@@ -4,7 +4,7 @@
 <head>
     @include('global_includes.meta')
     <link rel="shortcut icon" href="mis/peso_logo.png" />
-    <link rel="stylesheet" type="text/css" href="{{asset('home_assets/home3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('home_assets/home4.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,16 +19,21 @@
         <div class="cpesd">
             <h1>CPESD MIS</h1>
         </div>
-        <div class="menu">
+        <div class="menu" id="menu">
             <ul>
                 <?php if(session('user_type') == 'admin') { ?>
                 <li><a href="{{url('/admin/sysm/dashboard')}}">System Management</a></l>
                 <?php } ?>
-                <li><a href="#">My Profile</a></li>
+                <li><a href="{{url('/user/profile/view')}}">My Profile</a></li>
                 <li><a href="{{url('/logout')}}">Logout</a></li>
             </ul>
         </div>
+        
     </div>
+    <div class="toggle-icon" id="toggle-icon">
+            <i class="fa fa-bars" id="open"></i>
+           
+        </div>
     <div class="bg-img">
         <img src="{{ asset('assets/img/peso_flag.jpg')}}">
     </div>
@@ -97,6 +102,16 @@
         };
 
     }
+
+
+    document.querySelector('.toggle-icon').onclick = function() {
+      var element = document.getElementById("menu");
+      element.classList.toggle("show");
+      var element1 = document.getElementById("open");
+      element1.classList.toggle("fa-close");
+    }
+
+
 
 
 </script>

@@ -4623,7 +4623,7 @@ CREATE TABLE `documents` (
   `destination_type` set('simple','complex') NOT NULL,
   `note` text,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `documents`
@@ -5638,7 +5638,7 @@ CREATE TABLE `document_types` (
   `type_id` int NOT NULL,
   `type_name` varchar(150) NOT NULL,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `document_types`
@@ -5706,7 +5706,7 @@ CREATE TABLE `final_actions` (
   `action_id` int NOT NULL,
   `action_name` varchar(255) NOT NULL,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `final_actions`
@@ -5739,7 +5739,7 @@ CREATE TABLE `history` (
   `final_action_taken` text,
   `to_receiver` set('yes','no') NOT NULL,
   `remarks` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `history`
@@ -9300,7 +9300,7 @@ CREATE TABLE `offices` (
   `office` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
   `office_status` enum('inactive','active') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `offices`
@@ -9476,7 +9476,7 @@ CREATE TABLE `programs` (
   `program` varchar(255) NOT NULL,
   `program_description` text,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `programs`
@@ -9503,7 +9503,7 @@ CREATE TABLE `program_block` (
   `program_id` int NOT NULL,
   `person_id` int NOT NULL,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `program_block`
@@ -9584,7 +9584,7 @@ CREATE TABLE `security` (
   `us_id` int NOT NULL,
   `security_code` varchar(255) NOT NULL,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `security`

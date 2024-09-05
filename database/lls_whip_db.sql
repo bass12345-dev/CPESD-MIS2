@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 19, 2024 at 05:07 PM
--- Server version: 8.3.0
--- PHP Version: 8.2.20
+-- Host: 127.0.0.1
+-- Generation Time: Sep 05, 2024 at 09:24 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contractors` (
-  `contractor_id` int NOT NULL,
+  `contractor_id` int(11) NOT NULL,
   `contractor_name` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
   `province_code` varchar(255) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `contractors` (
   `email_address` varchar(255) DEFAULT NULL,
   `proprietor` varchar(255) DEFAULT NULL,
   `status` set('active','inactive') NOT NULL,
-  `added_by` int NOT NULL,
+  `added_by` int(11) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -65,13 +65,13 @@ INSERT INTO `contractors` (`contractor_id`, `contractor_name`, `province`, `prov
 --
 
 CREATE TABLE `employees` (
-  `employee_id` int NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `first_name` varchar(150) NOT NULL,
   `middle_name` varchar(150) DEFAULT NULL,
-  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `extension` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `last_name` varchar(150) DEFAULT NULL,
+  `extension` varchar(150) DEFAULT NULL,
   `province` varchar(255) NOT NULL,
-  `province_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `province_code` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `city_code` varchar(255) NOT NULL,
   `barangay` varchar(255) DEFAULT NULL,
@@ -115,7 +115,7 @@ INSERT INTO `employees` (`employee_id`, `first_name`, `middle_name`, `last_name`
 --
 
 CREATE TABLE `employment_status` (
-  `employment_status_id` int NOT NULL,
+  `employment_status_id` int(11) NOT NULL,
   `status` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -136,7 +136,7 @@ INSERT INTO `employment_status` (`employment_status_id`, `status`, `created_on`)
 --
 
 CREATE TABLE `establishments` (
-  `establishment_id` int NOT NULL,
+  `establishment_id` int(11) NOT NULL,
   `establishment_code` varchar(150) NOT NULL,
   `establishment_name` varchar(255) NOT NULL,
   `contact_number` varchar(30) DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `establishments` (
   `authorized_personnel` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
   `status` set('active','inactive') NOT NULL,
-  `added_by` int NOT NULL,
+  `added_by` int(11) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -165,12 +165,12 @@ INSERT INTO `establishments` (`establishment_id`, `establishment_code`, `establi
 --
 
 CREATE TABLE `establishment_employee` (
-  `establishment_employee_id` int NOT NULL,
-  `employee_id` int NOT NULL,
-  `establishment_id` int NOT NULL,
-  `position_id` int NOT NULL,
+  `establishment_employee_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `establishment_id` int(11) NOT NULL,
+  `position_id` int(11) NOT NULL,
   `nature_of_employment` varchar(255) NOT NULL,
-  `status_of_employment_id` int NOT NULL,
+  `status_of_employment_id` int(11) NOT NULL,
   `level_of_employment` set('rank_and_file','managerial','proprietor') NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date DEFAULT NULL,
@@ -184,12 +184,12 @@ CREATE TABLE `establishment_employee` (
 --
 
 CREATE TABLE `establishment_monitoring` (
-  `establishment_monitoring_id` int NOT NULL,
-  `establishment_id` int NOT NULL,
+  `establishment_monitoring_id` int(11) NOT NULL,
+  `establishment_id` int(11) NOT NULL,
   `date_of_monitoring` datetime NOT NULL,
   `specific_activity` text NOT NULL,
   `annotations` text NOT NULL,
-  `remarks` text,
+  `remarks` text DEFAULT NULL,
   `monitoring_status` set('pending','approved') DEFAULT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -201,9 +201,9 @@ CREATE TABLE `establishment_monitoring` (
 --
 
 CREATE TABLE `establishment_monitoring_employee` (
-  `estab_mon_emp_id` int NOT NULL,
-  `establishment_monitoring_id` int NOT NULL,
-  `employee_id` int NOT NULL,
+  `estab_mon_emp_id` int(11) NOT NULL,
+  `establishment_monitoring_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -214,7 +214,7 @@ CREATE TABLE `establishment_monitoring_employee` (
 --
 
 CREATE TABLE `positions` (
-  `position_id` int NOT NULL,
+  `position_id` int(11) NOT NULL,
   `position` varchar(255) NOT NULL,
   `type` set('lls','whip') NOT NULL,
   `created_on` datetime NOT NULL
@@ -241,13 +241,13 @@ INSERT INTO `positions` (`position_id`, `position`, `type`, `created_on`) VALUES
 --
 
 CREATE TABLE `projects` (
-  `project_id` int NOT NULL,
-  `contractor_id` int NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `contractor_id` int(11) NOT NULL,
   `project_title` varchar(255) NOT NULL,
-  `project_nature_id` int NOT NULL,
-  `project_cost` bigint NOT NULL,
+  `project_nature_id` int(11) NOT NULL,
+  `project_cost` bigint(20) NOT NULL,
   `barangay` varchar(255) NOT NULL,
-  `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
   `date_started` date NOT NULL,
   `date_completed` date DEFAULT NULL,
   `project_status` set('ongoing','completed') NOT NULL,
@@ -268,17 +268,17 @@ INSERT INTO `projects` (`project_id`, `contractor_id`, `project_title`, `project
 --
 
 CREATE TABLE `project_employee` (
-  `project_employee_id` int NOT NULL,
-  `project_id` int NOT NULL,
-  `employee_id` int NOT NULL,
-  `position_id` int NOT NULL,
+  `project_employee_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `position_id` int(11) NOT NULL,
   `nature_of_employment` varchar(255) NOT NULL,
-  `status_of_employment_id` int NOT NULL,
+  `status_of_employment_id` int(11) NOT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `level_of_employment` set('rank_and_file','managerial','proprietor') NOT NULL,
-  `project_monitoring_id` int NOT NULL,
-  `location_status` set('near','far','within') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `project_monitoring_id` int(11) NOT NULL,
+  `location_status` set('near','far','within') NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -312,15 +312,16 @@ INSERT INTO `project_employee` (`project_employee_id`, `project_id`, `employee_i
 --
 
 CREATE TABLE `project_monitoring` (
-  `project_monitoring_id` int NOT NULL,
-  `project_id` int NOT NULL,
-  `added_by` int NOT NULL,
+  `project_monitoring_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `whip_code` varchar(255) NOT NULL,
+  `added_by` int(11) NOT NULL,
   `date_of_monitoring` date NOT NULL,
   `specific_activity` text NOT NULL,
-  `annotations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `annotations` text DEFAULT NULL,
   `monitoring_status` set('pending','approved') NOT NULL,
   `approved_date` datetime DEFAULT NULL,
-  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `remarks` text DEFAULT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -328,11 +329,11 @@ CREATE TABLE `project_monitoring` (
 -- Dumping data for table `project_monitoring`
 --
 
-INSERT INTO `project_monitoring` (`project_monitoring_id`, `project_id`, `added_by`, `date_of_monitoring`, `specific_activity`, `annotations`, `monitoring_status`, `approved_date`, `remarks`, `created_on`) VALUES
-(16, 12, 9, '2024-08-18', 'asdsadasdsadasdsadasdsa', 'asdasdasdasd', 'approved', '2024-08-18 08:31:29', NULL, '2024-08-18 08:30:32'),
-(17, 13, 9, '2024-08-19', 'sadsad asdsa', 'dsadsadsa', 'pending', NULL, NULL, '2024-08-18 16:07:42'),
-(18, 13, 9, '2024-08-20', 'asdasd', 'sadsada', 'pending', NULL, NULL, '2024-08-19 14:00:58'),
-(19, 14, 9, '2024-08-20', 'Excavation/Column Installation', NULL, 'pending', NULL, NULL, '2024-08-19 14:18:03');
+INSERT INTO `project_monitoring` (`project_monitoring_id`, `project_id`, `whip_code`, `added_by`, `date_of_monitoring`, `specific_activity`, `annotations`, `monitoring_status`, `approved_date`, `remarks`, `created_on`) VALUES
+(16, 12, '', 9, '2024-08-18', 'asdsadasdsadasdsadasdsa', 'asdasdasdasd', 'approved', '2024-08-18 08:31:29', NULL, '2024-08-18 08:30:32'),
+(17, 13, '', 9, '2024-08-19', 'sadsad asdsa', 'dsadsadsa', 'pending', NULL, NULL, '2024-08-18 16:07:42'),
+(18, 13, '', 9, '2024-08-20', 'asdasd', 'sadsada', 'pending', NULL, NULL, '2024-08-19 14:00:58'),
+(19, 14, '', 9, '2024-08-20', 'Excavation/Column Installation', NULL, 'pending', NULL, NULL, '2024-08-19 14:18:03');
 
 -- --------------------------------------------------------
 
@@ -341,9 +342,9 @@ INSERT INTO `project_monitoring` (`project_monitoring_id`, `project_id`, `added_
 --
 
 CREATE TABLE `project_monitoring_employee` (
-  `proj_mon_emp_id` int NOT NULL,
-  `project_monitoring_id` int NOT NULL,
-  `employee_id` int NOT NULL,
+  `proj_mon_emp_id` int(11) NOT NULL,
+  `project_monitoring_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -354,8 +355,8 @@ CREATE TABLE `project_monitoring_employee` (
 --
 
 CREATE TABLE `project_nature` (
-  `project_nature_id` int NOT NULL,
-  `project_nature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `project_nature_id` int(11) NOT NULL,
+  `project_nature` varchar(255) NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -374,11 +375,11 @@ INSERT INTO `project_nature` (`project_nature_id`, `project_nature`, `created_on
 --
 
 CREATE TABLE `remarks` (
-  `remarks_id` int NOT NULL,
-  `project_monitoring_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `remarks_id` int(11) NOT NULL,
+  `project_monitoring_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `remarks` text NOT NULL,
-  `seen_status` set('unseen','seen') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `seen_status` set('unseen','seen') NOT NULL,
   `created_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -488,85 +489,85 @@ ALTER TABLE `remarks`
 -- AUTO_INCREMENT for table `contractors`
 --
 ALTER TABLE `contractors`
-  MODIFY `contractor_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `contractor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `employment_status`
 --
 ALTER TABLE `employment_status`
-  MODIFY `employment_status_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `employment_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `establishments`
 --
 ALTER TABLE `establishments`
-  MODIFY `establishment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `establishment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `establishment_employee`
 --
 ALTER TABLE `establishment_employee`
-  MODIFY `establishment_employee_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `establishment_employee_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `establishment_monitoring`
 --
 ALTER TABLE `establishment_monitoring`
-  MODIFY `establishment_monitoring_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `establishment_monitoring_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `establishment_monitoring_employee`
 --
 ALTER TABLE `establishment_monitoring_employee`
-  MODIFY `estab_mon_emp_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `estab_mon_emp_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `position_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `project_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `project_employee`
 --
 ALTER TABLE `project_employee`
-  MODIFY `project_employee_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `project_employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `project_monitoring`
 --
 ALTER TABLE `project_monitoring`
-  MODIFY `project_monitoring_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `project_monitoring_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `project_monitoring_employee`
 --
 ALTER TABLE `project_monitoring_employee`
-  MODIFY `proj_mon_emp_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `proj_mon_emp_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `project_nature`
 --
 ALTER TABLE `project_nature`
-  MODIFY `project_nature_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `project_nature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `remarks`
 --
 ALTER TABLE `remarks`
-  MODIFY `remarks_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `remarks_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

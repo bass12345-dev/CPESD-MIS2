@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand navbar-light navbar-bg">
-    <a class="sidebar-toggle js-sidebar-toggle">
+<?php $segments = Request::segments();?>
+    <a class="sidebar-toggle js-sidebar-toggle <?= $segments[2] == 'view' ? 'd-none' : '' ?>">
         <i class="hamburger align-self-center"></i>
     </a>
     <div class="navbar-collapse collapse">

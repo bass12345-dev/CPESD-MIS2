@@ -9,6 +9,8 @@ use App\Http\Middleware\UserLoginCheck;
 use App\Http\Middleware\WatchCheck;
 use App\Http\Middleware\WhipCheck;
 use Illuminate\Support\Facades\Route;
+use App\Repositories\CustomRepository;
+use Illuminate\Cache\Repository;
 
 //Auth View
 Route::get('/', function () {
@@ -70,7 +72,15 @@ Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm
 
 //USER VIEW 
 Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
-
+                                       //Profile
+         Route::get('/profile/view', 
+                     function () {
+                        $repo                       = new CustomRepository();
+                        $data['user_data']          = $repo->q_get_where(config('custom_config.database.users'),array('user_id'=> session('user_id')),'users')->first();
+                        $data['barangay']           = config('custom_config.barangay');
+                        $data['title']              = $data['user_data']->first_name.' '.$data['user_data']->middle_name.' '.$data['user_data']->last_name.' '.$data['user_data']->extension;
+                           return view('profile.profile')->with($data);
+                  });
                                        //System
       //System Authorization
           Route::get("/sysm/c-i-a",[ App\Http\Controllers\system_management\ManageUserController::class, 'check_authorized']);
@@ -212,6 +222,10 @@ Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
 
 //USER ACTION LLS_WHIP
 Route::middleware([SessionGuard::class])->prefix('/user/act')->group(function () {
+                                 //Profile
+      Route::post("/update-profile",[App\Http\Controllers\auth\AuthController::class, 'update_profile']);
+      Route::post("/ck",[App\Http\Controllers\auth\AuthController::class, 'check_password']);
+      Route::post("/up",[App\Http\Controllers\auth\AuthController::class, 'update_password']);
                                  //LABOR LOCALIZATION
 
       //Dashboard
