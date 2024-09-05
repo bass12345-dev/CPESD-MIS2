@@ -40,8 +40,8 @@
                                         <i class="fa fa-dollar"></i>
                                     </div>
                                     <div class="nk-int-st">
-                                        <input type="text" class="form-control" name="project_cost"
-                                            placeholder="Project Cost">
+                                        <input type="text" class="form-control numbers" name="project_cost"
+                                            placeholder="000000000000.00">
                                     </div>
                                 </div>
                             </div>

@@ -200,6 +200,8 @@
       });
     }
 
+    let number =  parseFloat(data.data.project_cost).toFixed(2)
+
 
 
     let header = '<div class="header">\
@@ -226,7 +228,7 @@
             </tr>\
              <tr>\
                 <td>Project Cost</td>\
-                <td ><span >' + data.data.project_cost + '</span></td>\
+                <td ><span >&#8369; ' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></td>\
             </tr>\
               <tr>\
                 <td>Date Started</td>\

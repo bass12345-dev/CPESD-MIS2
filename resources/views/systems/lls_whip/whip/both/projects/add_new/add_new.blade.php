@@ -24,5 +24,16 @@
 
     });
 
+    $(".numbers").keyup(function (e) {
+      checkNumbersOnly($(this));
+   });
+
+   function checkNumbersOnly(myfield) {
+      if (/[^\d\.]/g.test(myfield.val())) {
+         myfield.val(myfield.val().replace(/[^\d\.]/g, ''));
+      }
+   }
+
+
 </script>
 @endsection

@@ -97,7 +97,7 @@
    $(document).on('click', 'li.delete', function() {
       var id = $(this).data('id');
       var url = '/admin/sysm/act/delete-user';
-      delete_item(id, url, button_text = '', text = 'Are You Sure ? ', table)
+      delete_item(id, url, button_text = '', text = '', table)
    });
 </script>
 @endsection
