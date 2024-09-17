@@ -517,4 +517,30 @@ class EmployeeQuery
       ->get();
     return $rows;
   }
+
+  //WHIP
+
+    // Get Employee Job History
+
+  public function QueryEmployeeJobHistory($id){
+    
+    $rows = DB::connection($this->conn)->table('project_employee as project_employee')
+      ->leftJoin('projects', 'projects.project_id', '=', 'project_employee.project_id')
+      ->leftJoin('positions', 'positions.position_id', '=', 'project_employee.position_id')
+      ->leftJoin('contractors', 'contractors.contractor_id', '=', 'projects.contractor_id')
+      ->select(
+        'project_title as project_title',
+        'contractor_name as contractor_name',
+        'position as position',
+        'start_date as start_date',
+        'end_date as end_date',
+        'project_employee.nature_of_employment as nature_of_employment',
+      )
+      ->where('project_employee.employee_id', $id)
+      ->orderBy('project_employee.start_date')
+      ->get();
+    return $rows;
+
+
+  }
 }

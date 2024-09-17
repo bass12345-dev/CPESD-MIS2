@@ -109,7 +109,38 @@ class EmployeeController extends Controller
         }
         return response()->json($items);
     }
+
+    public function profile($id){
+        $count = $this->customRepository->q_get_where($this->conn,array('employee_id' => $id),$this->employee_table);
+        if($count->count() > 0){
+
+            $row = $count->first();
+            $data['title']  = $this->userService->user_full_name($row);
+            $data['row']    = $row;
+            $data['job_info'] = $this->employeeQuery->QueryEmployeeJobHistory($id);
+            return view('systems.lls_whip.whip.admin.pages.employee_profile.employee_profile')->with($data);
+
+        }else {
+            echo '404';
+        }
+    }
     // UPDATE
+    public function update_employee(Request $request){
+        $where = array('employee_id' => $request->input('employee_id'));
+        $update = $this->customRepository->update_item($this->conn,$this->employee_table,$where,$request->all());
+        if ($update) {
+            // Registration successful
+            return response()->json([
+                'message' => 'Employee Updated Successfully', 
+                'response' => true
+            ], 201);
+        }else {
+            return response()->json([
+                'message' => 'Something Wrong/No Changes Apply', 
+                'response' => false
+            ], 422);
+        }
+    }   
     // DELETE
     public function delete_employee(Request $request)
     {

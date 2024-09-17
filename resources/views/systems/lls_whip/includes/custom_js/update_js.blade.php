@@ -4,6 +4,7 @@
 
         information_table.find('textarea').removeClass('hidden');
         information_table.find('input[type=hidden]').prop("type", "text");
+        information_table.find('input[name=birthdate]').prop("type", "date");
         information_table.find('select').attr('hidden', false)
         information_table.find('span.title1').attr('hidden', true);
         $('.cancel-edit').removeClass('hidden');
@@ -14,6 +15,7 @@
     $(document).on('click', 'button.cancel-edit', function () {
         information_table.find('textarea').addClass('hidden');
         information_table.find('input[type=text]').prop("type", "hidden");
+        information_table.find('input[name=birthdate]').prop("type", "hidden");
         information_table.find('span.title1').attr('hidden', false);
         information_table.find('select').attr('hidden', true)
         $(this).addClass('hidden');

@@ -57,6 +57,9 @@
         let form = $(this);
         table = null;
         _insertAjax(url, form, table);
+        setTimeout(() => {
+            tracking_number()
+        }, 5000);
        
 
     });

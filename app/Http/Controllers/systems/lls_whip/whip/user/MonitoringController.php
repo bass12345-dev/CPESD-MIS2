@@ -209,12 +209,12 @@ class MonitoringController extends Controller
                    $whip_number = $add_str.'001';
 
              } else if ($current_year < $last_created) {
-                   $last_pmas_number_add_one = $this->monitoringQuery->get_whip_code($ymd_format)->first()->whip_code + 1;
-                   $whip_number = $add_str.$this->customService->put_zeros_p_r($last_pmas_number_add_one);
+                   $last_pmas_number_add_one = (int)$this->monitoringQuery->get_whip_code($ymd_format)->first()->whip_code + 1;
+                   $whip_number = $this->customService->put_zeros_p_r($last_pmas_number_add_one);
 
              } else if ($current_year === $last_created) {
                    $last_pmas_number_add_one = $this->monitoringQuery->get_whip_code($current_year)->first()->whip_code + 1;
-                   $whip_number = $add_str.$this->customService->put_zeros_p_r($last_pmas_number_add_one);
+                   $whip_number = $this->customService->put_zeros_p_r($last_pmas_number_add_one);
 
              }
 
