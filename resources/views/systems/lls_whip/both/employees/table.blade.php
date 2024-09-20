@@ -19,10 +19,8 @@
                                         <th>Address</th>
                                         <th>Birth Date</th>
                                         <th>Contact Number</th>
-                                    
                                     </tr>
                                 </thead>
-                              
                             </table>
                         </div>
                     </div>

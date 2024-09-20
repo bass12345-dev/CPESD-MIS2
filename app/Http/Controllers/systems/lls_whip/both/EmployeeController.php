@@ -110,15 +110,30 @@ class EmployeeController extends Controller
         return response()->json($items);
     }
 
-    public function profile($id){
+    public function whip_profile($id){
         $count = $this->customRepository->q_get_where($this->conn,array('employee_id' => $id),$this->employee_table);
         if($count->count() > 0){
 
             $row = $count->first();
             $data['title']  = $this->userService->user_full_name($row);
             $data['row']    = $row;
-            $data['job_info'] = $this->employeeQuery->QueryEmployeeJobHistory($id);
+            $data['job_info'] = $this->employeeQuery->QueryWHIPEmployeeJobHistory($id);
             return view('systems.lls_whip.whip.admin.pages.employee_profile.employee_profile')->with($data);
+
+        }else {
+            echo '404';
+        }
+    }
+
+    public function lls_profile($id){
+        $count = $this->customRepository->q_get_where($this->conn,array('employee_id' => $id),$this->employee_table);
+        if($count->count() > 0){
+
+            $row = $count->first();
+            $data['title']  = $this->userService->user_full_name($row);
+            $data['row']    = $row;
+            $data['job_info'] = $this->employeeQuery->QueryLLSEmployeeJobHistory($id);
+            return view('systems.lls_whip.lls.both.employee_info.employee_info')->with($data);
 
         }else {
             echo '404';

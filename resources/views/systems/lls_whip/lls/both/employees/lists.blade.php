@@ -84,7 +84,7 @@
                 orderable: false,
                 className: 'text-center',
                 render: function (data, type, row) {
-                    return '<a href="' + base_url + '/<?php echo session('user_type') ?>/whip/employee/' + row.employee_id + '">' + row.full_name + '</a>';
+                    return '<a href="' + base_url + '/<?php echo session('user_type') ?>/lls/employee/' + row.employee_id + '">' + row.full_name + '</a>';
 
                 }
             },

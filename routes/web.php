@@ -491,7 +491,8 @@ Route::middleware([SessionGuard::class,AdminCheck::class])->prefix('/admin')->gr
          Route::get("/whip/analytics",[ App\Http\Controllers\systems\lls_whip\whip\admin\DashboardController::class, 'analytics']);
       //Employees Record
          Route::get("/whip/employees-record",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'index']);
-         Route::get("/whip/employee/{id}",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'profile']);
+         Route::get("/whip/employee/{id}",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'whip_profile']);
+         Route::get("/lls/employee/{id}",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'lls_profile']);
       //Contractors
          Route::get("/whip/add-new-contractor",[ App\Http\Controllers\systems\lls_whip\whip\both\ContractorsController::class, 'add_new_contractor']);
          Route::get("/whip/contractors-list",[ App\Http\Controllers\systems\lls_whip\whip\both\ContractorsController::class, 'contractors_list']);

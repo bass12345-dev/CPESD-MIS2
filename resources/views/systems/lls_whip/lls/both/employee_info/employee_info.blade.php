@@ -1,4 +1,4 @@
-@extends('systems.lls_whip.whip.' . session('user_type') . '.layout.' . session('user_type') . '_master')
+@extends('systems.lls_whip.lls.user.layout.user_master')
 @section('title', $title)
 @section('content')
 
@@ -9,7 +9,7 @@
                 @include('systems.lls_whip.both.employees.employee_information')
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                @include('systems.lls_whip.whip.both.employee_profile.job_table')
+                @include('systems.lls_whip.lls.both.employee_info.sections.job_table')
             </div>
         </div>
     </div>

@@ -522,7 +522,7 @@ class EmployeeQuery
 
     // Get Employee Job History
 
-  public function QueryEmployeeJobHistory($id){
+  public function QueryWHIPEmployeeJobHistory($id){
     
     $rows = DB::connection($this->conn)->table('project_employee as project_employee')
       ->leftJoin('projects', 'projects.project_id', '=', 'project_employee.project_id')
@@ -537,7 +537,28 @@ class EmployeeQuery
         'project_employee.nature_of_employment as nature_of_employment',
       )
       ->where('project_employee.employee_id', $id)
-      ->orderBy('project_employee.start_date')
+      ->orderBy('project_employee.project_employee_id','desc')
+      ->get();
+    return $rows;
+
+
+  }
+
+
+  public function QueryLLSEmployeeJobHistory($id){
+    
+    $rows = DB::connection($this->conn)->table('establishment_employee as establishment_employee')
+      ->leftJoin('establishments', 'establishments.establishment_id', '=', 'establishment_employee.establishment_id')
+      ->leftJoin('positions', 'positions.position_id', '=', 'establishment_employee.position_id')
+      ->select(
+        'establishment_name as establishment_name',
+        'positions.position as position',
+        'start_date as start_date',
+        'end_date as end_date',
+        'nature_of_employment as nature_of_employment',
+      )
+      ->where('establishment_employee.employee_id', $id)
+      ->orderBy('establishment_employee.establishment_employee_id','desc')
       ->get();
     return $rows;
 
