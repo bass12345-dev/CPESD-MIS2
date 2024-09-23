@@ -114,7 +114,7 @@ Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
             Route::get("/project-information/{id}",[ App\Http\Controllers\systems\lls_whip\whip\both\ProjectsController::class, 'project_information']);
          //Project Monitoring
             Route::get("/add-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'add_monitoring_view']);
-            Route::get("/pending-projects-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'pending_project_monitoring_view']);
+            // Route::get("/pending-projects-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'pending_project_monitoring_view']);
             Route::get("/project-monitoring-info/{id}",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'project_monitoring_information']);
             Route::get("/approved-projects-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\user\MonitoringController::class, 'approved_project_monitoring_view']);
             //Reports

@@ -45,9 +45,9 @@
                                 </li>
                                 <li><a href="{{url('user/whip/add-monitoring')}}" class="<?= $segments[2] == 'add-monitoring' ? 'active' : '' ?>">Add New Monitoring</a>
                                 </li>
-                                <li><a href="{{url('user/whip/pending-projects-monitoring')}}" class="<?= $segments[2] == 'pending-projects-monitoring' ? 'active' : '' ?>">Pending Projects Monitoring</a>
-                                </li>
-                                <li><a href="{{url('user/whip/approved-projects-monitoring')}}" class="<?= $segments[2] == 'approved-projects-monitoring' ? 'active' : '' ?>">Approved Projects Monitoring</a>
+                                <!-- <li><a href="{{url('user/whip/pending-projects-monitoring')}}" class="<?= $segments[2] == 'pending-projects-monitoring' ? 'active' : '' ?>">Pending Projects Monitoring</a>
+                                </li> -->
+                                <li><a href="{{url('user/whip/approved-projects-monitoring')}}" class="<?= $segments[2] == 'approved-projects-monitoring' ? 'active' : '' ?>">Projects Monitoring</a>
                                 </li>
                             </ul>
                         </div>

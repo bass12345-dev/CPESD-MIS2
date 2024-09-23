@@ -101,8 +101,9 @@ class MonitoringController extends Controller
             'date_of_monitoring'    => $request->input('date_of_monitoring'),
             'specific_activity'     => $request->input('specific_activity'),
             'annotations'           => $request->input('annotations'),
-            'monitoring_status'     => 'pending',
+            'monitoring_status'     => 'approved',
             'added_by'              => session('user_id'),
+            'approved_date'         => Carbon::now()->format('Y-m-d H:i:s'),
             'created_on'            => Carbon::now()->format('Y-m-d H:i:s'),
         );
 
