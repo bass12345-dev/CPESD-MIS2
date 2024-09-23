@@ -57,7 +57,7 @@ class MonitoringController extends Controller
 
     public function approved_project_monitoring_view()
     {
-        $data['title']              = 'Approved Project Monitoring';
+        $data['title']              = 'Project Monitoring';
         $data['current']            = Carbon::now()->year.'-'.Carbon::now()->month;
         return view('systems.lls_whip.whip.admin.pages.project_monitoring.approved_list.lists')->with($data);
     }
