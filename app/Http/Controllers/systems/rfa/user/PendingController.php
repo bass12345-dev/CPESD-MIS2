@@ -182,7 +182,7 @@ class PendingController extends Controller
         if (session('user_type') == 'admin') {
     
             $where = array('rfa_status' => 'pending');
-            $count = $this->customRepository->q_get($this->conn,'rfa_transactions')->count(); 
+            $count = $this->customRepository->q_get_where($this->conn,$where,'rfa_transactions')->count(); 
            
         }else if (session('user_type') == 'user') {
             

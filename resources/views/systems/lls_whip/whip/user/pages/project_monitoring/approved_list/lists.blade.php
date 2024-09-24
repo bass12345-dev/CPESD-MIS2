@@ -34,6 +34,9 @@ var search = function (month) {
             },
             columns: [
                 {
+                data: 'project_monitoring_id'
+            },
+                {
                     data: 'i'
                 },
                 {
@@ -61,8 +64,17 @@ var search = function (month) {
                 
 
             ],
+            'select': {
+                'style': 'multi',
+            },
 
             columnDefs: [
+                {
+                'targets': 0,
+                'checkboxes': {
+                    'selectRow': true
+                }
+            },
                 {
                     targets: 2,
                     data: null,
@@ -79,6 +91,23 @@ var search = function (month) {
 
     $(document).ready(function () {
         search(month);
+    });
+
+    
+    $('button#multi-delete').on('click', function () {
+        var button_text = 'Delete selected items';
+        var text = '';
+        var url = '/user/act/whip/d-p-m';
+        let items = get_select_items_datatable();
+        var data = {
+            id: items,
+        };
+
+        if (items.length == 0) {
+            toast_message_error('Please Select at Least One')
+        } else {
+            delete_item(data, url, button_text, text, table);
+        }
     });
 
 </script>

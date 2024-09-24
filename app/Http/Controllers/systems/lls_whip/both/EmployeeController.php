@@ -165,6 +165,8 @@ class EmployeeController extends Controller
             foreach ($id as $row) {
                $where = array('employee_id' => $row);
                $this->customRepository->delete_item($this->conn,$this->employee_table,$where);
+               $this->customRepository->delete_item($this->conn,'establishment_employee',$where);
+               $this->customRepository->delete_item($this->conn,'project_employee',$where);
             }
             $this->customRepository->delete_item($this->conn,$this->est_employee_table,$where);
             $data = array('message' => 'Deleted Succesfully', 'response' => true);

@@ -138,7 +138,7 @@ class DtsQuery
 
     public function get_incoming_documents()
     {
-
+        DB::statement('SET SQL_BIG_SELECTS=1');
         $rows = DB::table($this->dts_table_name.'.history as history')
             ->leftJoin($this->dts_table_name.'.documents as documents', 'documents.tracking_number', '=', 'history.t_number')
             ->leftJoin($this->users_table_name.'.users as users', 'users.user_id', '=', 'history.user1')
@@ -162,13 +162,13 @@ class DtsQuery
                 'users.extension as extension',
                 DB::Raw("CONCAT(users.first_name, ' ', users.middle_name , ' ', users.last_name,' ',users.extension) as name")
             )
-            ->where('user2', session('user_id'))
-            ->where('doc_status', '!=', 'cancelled')
-            ->where('received_status', NULL)
-            ->where('status', 'torec')
-            ->where('to_receiver', 'no')
-            ->where('release_status', NULL)
-            ->orderBy('tracking_number', 'desc')->get();
+            ->where('history.user2', session('user_id'))
+            ->where('documents.doc_status', '!=', 'cancelled')
+            ->where('history.received_status', NULL)
+            ->where('history.status', 'torec')
+            ->where('history.to_receiver', 'no')
+            ->where('history.release_status', NULL)
+            ->orderBy('documents.tracking_number', 'desc')->get();
 
         return $rows;
     }
@@ -176,7 +176,7 @@ class DtsQuery
     //Received Documents
     public function get_received_documents()
     {
-
+        DB::statement('SET SQL_BIG_SELECTS=1');
         $rows = DB::table($this->dts_table_name.'.history as history')
             ->leftJoin($this->dts_table_name.'.documents as documents', 'documents.tracking_number', '=', 'history.t_number')
             ->leftJoin($this->users_table_name.'.users as users', 'users.user_id', '=', 'history.user2')
@@ -214,6 +214,7 @@ class DtsQuery
 
     public function QueryForwardedDocuments()
     {
+        DB::statement('SET SQL_BIG_SELECTS=1');
         $rows = DB::table($this->dts_table_name.'.history as history')
             ->leftJoin($this->dts_table_name.'.documents as documents', 'documents.tracking_number', '=', 'history.t_number')
             ->leftJoin($this->users_table_name.'.users as users', 'users.user_id', '=', 'history.user2')
@@ -257,6 +258,7 @@ class DtsQuery
 
     public function get_outgoing_documents()
     {
+        DB::statement('SET SQL_BIG_SELECTS=1');
         $row = DB::table($this->dts_table_name.'.outgoing_documents as outgoing_documents')
             ->leftJoin($this->dts_table_name.'.documents as documents', 'documents.document_id', '=', 'outgoing_documents.doc_id')
             ->leftJoin($this->users_table_name.'.users as users', 'users.user_id', '=', 'outgoing_documents.user_id')

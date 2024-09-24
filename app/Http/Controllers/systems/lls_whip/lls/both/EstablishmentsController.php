@@ -138,6 +138,7 @@ class EstablishmentsController extends Controller
             foreach ($id as $row) {
                 $where = array('establishment_id' => $row);
                 $this->customRepository->delete_item($this->conn, $this->establishments_table, $where);
+                $this->customRepository->delete_item($this->conn,'establishment_employee',$where);
             }
 
             $data = array('message' => 'Deleted Succesfully', 'response' => true);
