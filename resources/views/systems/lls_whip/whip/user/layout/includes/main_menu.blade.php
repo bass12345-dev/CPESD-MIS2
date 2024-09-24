@@ -23,8 +23,7 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="{{url('user/whip/dashboard')}}" class="<?= $segments[2] == 'dashboard' ? 'active' : '' ?>">Dashboard</a>
                                 </li>
-                                <li><a href="analytics.html">Analytics</a>
-                                </li>
+                              
 
                             </ul>
                         </div>

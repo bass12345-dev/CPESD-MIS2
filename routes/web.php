@@ -47,6 +47,7 @@ Route::get('/home', function () {
 Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm')->group(function () {
    Route::get("/dashboard",[ App\Http\Controllers\system_management\DashboardController::class, 'index']);
    Route::get("/login-history",[ App\Http\Controllers\system_management\LoginHistoryController::class, 'index']);
+   Route::get("/back-up-database",[ App\Http\Controllers\system_management\BackUpDBController::class, 'index']);
    //Manage USer
    Route::get("/manage-users",[ App\Http\Controllers\system_management\ManageUserController::class, 'index']);
    Route::get("/user/{id}",[ App\Http\Controllers\system_management\ManageUserController::class, 'view_profile']);
@@ -54,16 +55,13 @@ Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm
 //SYSTEM MANAGEMENT ACTIONS
 Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm/act')->group(function () {
    Route::get("/g-a-l-l",[ App\Http\Controllers\system_management\LoginHistoryController::class, 'get_all_login_logs']);
+   Route::get("/back-up-db",[ App\Http\Controllers\system_management\BackUpDBController::class, 'back_up_database']);
    //Manage User
    Route::get("/g-a-u",[ App\Http\Controllers\system_management\ManageUserController::class, 'get_all_users']);
    Route::post("/c-u-s",[ App\Http\Controllers\system_management\ManageUserController::class, 'change_user_status']);
    Route::post("/delete-user",[ App\Http\Controllers\system_management\ManageUserController::class, 'delete_user']);
    //System Authorization
    Route::post("/a-s",[ App\Http\Controllers\system_management\ManageUserController::class, 'authorize_system']);
-
-   
-
-
 });
 
 
@@ -97,6 +95,9 @@ Route::middleware([SessionGuard::class])->prefix('/user')->group(function () {
          Route::get("/lls/employees-record",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'index']);
 
          Route::get("/lls/compliant-reports",[App\Http\Controllers\systems\lls_whip\lls\both\CompliantController::class, 'index']);
+
+         Route::get("/whip/employee/{id}",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'whip_profile']);
+         Route::get("/lls/employee/{id}",[ App\Http\Controllers\systems\lls_whip\both\EmployeeController::class, 'lls_profile']);
         
                                           //WORKERS HIRED INFRASTRACTURE PROJECT
          Route::middleware([WhipCheck::class])->prefix('/whip')->group(function () {
@@ -501,7 +502,7 @@ Route::middleware([SessionGuard::class,AdminCheck::class])->prefix('/admin')->gr
       //Projects
          // Route::get("/whip/add-new-project",[ App\Http\Controllers\systems\lls_whip\whip\both\ProjectsController::class, 'add_new_project']);
          Route::get("/whip/projects-list",[ App\Http\Controllers\systems\lls_whip\whip\both\ProjectsController::class, 'projects_list']);
-         Route::get("/whip/pending-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\admin\MonitoringController::class, 'pending_project_monitoring_view']);
+         // Route::get("/whip/pending-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\admin\MonitoringController::class, 'pending_project_monitoring_view']);
          Route::get("/whip/approved-monitoring",[ App\Http\Controllers\systems\lls_whip\whip\admin\MonitoringController::class, 'approved_project_monitoring_view']);
 
          Route::get("/whip/project-information/{id}",[ App\Http\Controllers\systems\lls_whip\whip\both\ProjectsController::class, 'project_information']);

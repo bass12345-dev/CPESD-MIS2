@@ -26,6 +26,11 @@
                     <i class=" fas fa-file align-middle"></i> <span class="align-middle">Login History</span>
                 </a>
             </li>
+            <li class="sidebar-item <?= $segments[2] == 'back-up-database' ||  $segments[2] == 'user'  ? 'active' : '' ?>">
+                <a class="sidebar-link" href="{{url('/admin/sysm/back-up-database')}}">
+                    <i class=" fas fa-file align-middle"></i> <span class="align-middle">Back Up Database</span>
+                </a>
+            </li>
 
 
           

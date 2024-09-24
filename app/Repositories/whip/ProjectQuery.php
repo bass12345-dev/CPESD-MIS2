@@ -86,7 +86,7 @@ class ProjectQuery
                 'projects.project_cost as project_cost',
                 'projects.project_status as project_status',
                 'projects.date_started as date_started',
-                'projects.date_started as date_completed'                  
+                'projects.date_completed as date_completed'                  
 
     )
     ->where('projects.project_id', $id)

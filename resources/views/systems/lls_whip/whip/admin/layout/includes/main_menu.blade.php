@@ -48,9 +48,9 @@
                                 
                                 <li><a href="{{url('admin/whip/projects-list')}}" class="<?= $segments[2] == 'projects-list' ? 'active' : '' ?>">Projects List</a>
                                 </li>
-                                <li><a href="{{url('admin/whip/pending-monitoring')}}" class="<?= $segments[2] == 'pending-monitoring' ? 'active' : '' ?>">Pending Monitoring</a>
-                                </li>
-                                <li><a href="{{url('admin/whip/approved-monitoring')}}" class="<?= $segments[2] == 'approved-monitoring' ? 'active' : '' ?>">Approved Monitoring</a>
+                                <!-- <li><a href="{{url('admin/whip/pending-monitoring')}}" class="<?= $segments[2] == 'pending-monitoring' ? 'active' : '' ?>">Pending Monitoring</a>
+                                </li> -->
+                                <li><a href="{{url('admin/whip/approved-monitoring')}}" class="<?= $segments[2] == 'approved-monitoring' ? 'active' : '' ?>">Project Monitoring</a>
                                 </li>
                             </ul>
                         </div>

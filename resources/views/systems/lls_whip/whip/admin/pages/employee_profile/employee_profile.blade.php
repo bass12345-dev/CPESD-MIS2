@@ -14,10 +14,7 @@
         </div>
     </div>
     <hr>
-
-    
 </div>
-
 @endsection
 @section('js')
 @include('systems.lls_whip.includes.custom_js.update_js')

@@ -76,8 +76,9 @@
                 className: 'text-center',
                 render: function (data, type, row) {
                   
-                   let number = parseFloat(row.project_cost).toFixed(2);
-                   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                   let number =  parseFloat(row.project_cost).toFixed(2);
+
+                   return  '<span>&#8369  ' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span>';
                 }
             },
                 {

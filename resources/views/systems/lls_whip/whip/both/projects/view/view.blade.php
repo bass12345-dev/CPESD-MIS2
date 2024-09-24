@@ -28,14 +28,21 @@
 <script>
     $(document).on('click', 'button.submit', function () {
         let data = {
-            'project_id' : $('input[name=project_id]').val(),
-            'contractor_id': $('input[name=contractor_id]').val(),
-            'project_title': $('input[name=project_title]').val(),
-            'project_nature_id': $('select[name=project_nature]').val(),
-            'barangay': $('select[name=barangay]').val(),
-            'street': $('input[name=street]').val(),
-            'project_status': $('select[name=status]').val(),
+            'project_id'        : $('input[name=project_id]').val(),
+            'contractor_id'     : $('input[name=contractor_id]').val(),
+            'project_title'     : $('input[name=project_title]').val(),
+            'project_cost'      : $('input[name=project_cost]').val(),
+            'project_nature_id' : $('select[name=project_nature]').val(),
+            'barangay'          : $('select[name=barangay]').val(),
+            'street'            : $('input[name=street]').val(),
+            'project_status'    : $('select[name=status]').val(),
+            'date_started'      : $('input[name=project_date_started]').val(),
+            'date_completed'    : $('input[name=project_date_completed]').val()     
         }
+
+
+
+        
         var url = "/user/act/whip/update-project";
         Swal.fire({
             title: "Review First Before Submitting",

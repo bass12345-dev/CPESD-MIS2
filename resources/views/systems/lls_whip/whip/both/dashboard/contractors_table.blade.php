@@ -22,7 +22,7 @@
                                 <?php  $i = 1; foreach($contractors_data as $row): ?>
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td><a href="{{url('admin/whip/contractor-information/'.$row->contractor_id)}}">{{$row->contractor_name}}</a></td>
+                                    <td><a href="{{url(session('user_type').'/whip/contractor-information/'.$row->contractor_id)}}">{{$row->contractor_name}}</a></td>
                                     <td>{{$row->project_count_ongoing}}</td>
                                     <td>{{$row->project_count_completed}}</td>
                                 </tr>

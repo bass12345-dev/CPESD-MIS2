@@ -42,7 +42,7 @@
         <tr>
             <td>Project Cost</td>
             <td class="text-start">
-                <span class="title1">{{$row->project_cost}}</span>
+                <span class="title1"> &#8369 <?php echo  number_format($row->project_cost, 2, '.', '') ?></span>
                 <input type="hidden" class="form-control" name="project_cost" value="{{$row->project_cost}}">
             </td>
         </tr>
@@ -71,9 +71,16 @@
             </td>
         </tr>
         <tr>
+            <td>Date Started</td>
+            <td class="text-start">
+                <span class="title1">{{$row->date_started}}</span>
+                <input type="hidden" class="form-control" name="project_date_started" value="{{$row->date_started}}" >
+            </td>
+        </tr>
+        <tr>
             <td>Project Status</td>
             <td class="text-start">
-                <span class="title1">{{ ucfirst($row->project_status)}}</span>
+                <span class="title1"> <?php echo $row->project_status == 'ongoing' ? '<span class="badge notika-bg-danger">'.ucfirst($row->project_status).'</span>':  '<span class="badge notika-bg-success">'.ucfirst($row->project_status).'</span>' ?></span>
                 <select class="form-control" name="status" hidden>
                     <?php $is_selected = $row->project_status == 'ongoing' ? 'selected' : ''; $is_selected2 = $row->project_status == 'completed' ? 'selected' : ''; ?>
                     <option value="ongoing" {{$is_selected}}>Ongoing</option>
@@ -81,6 +88,16 @@
                 </select>
         </tr>
 
+
+            <tr>
+                <td>Date Completed</td>
+                <td class="text-start">
+                    <span class="title1">{{$row->date_completed}}</span>
+                    <input type="hidden" class="form-control" name="project_date_completed" value="{{$row->date_completed}}" >
+                </td>
+            </tr>
+   
+        
 
     </table>
 </div>
