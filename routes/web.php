@@ -56,6 +56,7 @@ Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm
 Route::middleware([SessionGuard::class, AdminCheck::class])->prefix('/admin/sysm/act')->group(function () {
    Route::get("/g-a-l-l",[ App\Http\Controllers\system_management\LoginHistoryController::class, 'get_all_login_logs']);
    Route::get("/back-up-db",[ App\Http\Controllers\system_management\BackUpDBController::class, 'back_up_database']);
+   Route::get("/get-databases",[ App\Http\Controllers\system_management\BackUpDBController::class, 'get_databases']);
    //Manage User
    Route::get("/g-a-u",[ App\Http\Controllers\system_management\ManageUserController::class, 'get_all_users']);
    Route::post("/c-u-s",[ App\Http\Controllers\system_management\ManageUserController::class, 'change_user_status']);
