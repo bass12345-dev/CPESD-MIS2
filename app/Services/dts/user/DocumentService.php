@@ -41,10 +41,16 @@ class DocumentService
         $this->user_table           = 'users';
     }
 
-    public function get_my_documents()
+    public function get_my_documents($month,$year)
     {
         $items = array();
-        $rows = $this->dtsQuery->get_my_documents();
+
+        if ($month == '' && $year == '') {
+            $rows = $this->dtsQuery->get_my_documents();
+        } else {
+            $rows = $this->dtsQuery->QueryUserDocumentsByMonth($month,$year);
+        }
+
         $i = 1;
         foreach ($rows as  $key) {
 
@@ -69,14 +75,14 @@ class DocumentService
                 'encoded_by'        => $this->userService->user_full_name($key),
                 'origin'            => $origin,
                 'origin_id'         => $key->origin_id,
-                'data'              => $key->document_name.','.
-                                       $key->tracking_number.','.
-                                       $key->type_name.','.
-                                       date('M d Y - h:i a', strtotime($key->d_created)).','.
-                                       $this->userService->user_full_name($key).','.
-                                       $key->destination_type.','.
-                                       $origin.','.
-                                       $key->document_description.','.
+                'data'              => $key->document_name.'*'.
+                                       $key->tracking_number.'*'.
+                                       $key->type_name.'*'.
+                                       date('M d Y - h:i a', strtotime($key->d_created)).'*'.
+                                       $this->userService->user_full_name($key).'*'.
+                                       $key->destination_type.'*'.
+                                       $origin.'*'.
+                                       $key->document_description.'*'.
                                        $key->document_id
                                        
 

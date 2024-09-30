@@ -123,6 +123,47 @@ class DtsQuery
     }
 
 
+
+    public function QueryUserDocumentsByMonth($month, $year)
+    {
+  
+        $rows = DB::table($this->dts_table_name.'.documents as documents')
+        ->leftjoin($this->users_table_name.'.users as users', 'users.user_id', '=', 'documents.u_id')
+        ->leftJoin($this->dts_table_name.'.document_types as document_types', 'document_types.type_id', '=', 'documents.doc_type')
+        ->leftJoin($this->dts_table_name.'.offices as offices', 'offices.office_id', '=', 'documents.origin')
+        ->select(
+            'documents.created as d_created',
+            'documents.doc_status as doc_status',
+            'documents.tracking_number as tracking_number',
+            'documents.document_name as document_name',
+            'documents.document_id as document_id',
+            'documents.doc_type as doc_type',
+            'documents.document_description as document_description',
+            'documents.destination_type as destination_type',
+            'documents.origin as origin_id',
+            'document_types.type_name as type_name',
+            'users.first_name as first_name',
+            'users.middle_name as middle_name',
+            'users.last_name as last_name',
+            'users.extension as extension',
+
+            'offices.office as origin',
+
+
+            DB::Raw("CONCAT(users.first_name, ' ', users.middle_name , ' ', users.last_name,' ',users.extension) as name")
+        )
+        ->where('u_id', session('user_id'))
+        ->whereMonth('documents.created', '=', $month)
+        ->whereYear('documents.created', '=', $year)
+        ->orderBy('documents.document_id', 'desc')
+        ->get();
+    return $rows;
+    }
+
+
+
+
+
     //Document Data
     public function get_document_data($tn){
         $row = DB::table($this->dts_table_name.'.documents')

@@ -4,6 +4,7 @@
         <a class="btn btn-primary" href="javascript:;" id="print_slips"><i class="fas fa-print"></i> Tracking Slips</a>
         <a class="btn btn-warning" href="javascript:;" id="cancel_documents" > Cancel</a>
         <hr>
+        @include('components.dts.filter_by_month')
     </div>
     <table class="table table-hover table-striped " id="my_document_table" style="width: 100%; ">
         <thead>

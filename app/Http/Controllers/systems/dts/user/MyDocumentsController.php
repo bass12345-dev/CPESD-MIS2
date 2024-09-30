@@ -8,6 +8,7 @@ use App\Repositories\dts\DtsQuery;
 use App\Services\dts\user\DocumentService;
 use App\Services\user\ActionLogService;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MyDocumentsController extends Controller
 {
@@ -37,12 +38,23 @@ class MyDocumentsController extends Controller
         $data['title']          = 'My Documents';
         $data['document_types'] = $this->customRepository->q_get_order($this->conn,$this->document_types_table, 'type_name', 'asc')->get();
         $data['offices']        = $this->customRepository->q_get_order($this->conn,$this->office_table, 'office', 'asc')->get();
+        $data['current']            = Carbon::now()->year.'-'.Carbon::now()->month;
         return view('systems.dts.user.pages.my_documents.my_documents')->with($data);
     }
 
     public function get_my_documents(){
 
-        $items = $this->documentService->get_my_documents();
+
+        $month = '';
+        $year = '';
+        if(isset($_GET['date'])){
+            $month =   date('m', strtotime($_GET['date']));
+            $year =   date('Y', strtotime($_GET['date']));
+        }
+        // $data = $this->documentService->get_all_document_process($month,$year);
+        // return response()->json($data);
+
+        $items = $this->documentService->get_my_documents($month,$year);
         return response()->json($items);
     }
 

@@ -4,11 +4,11 @@
      var rows_selected = table.column(0).checkboxes.selected();
      let arr = [];
         $.each(rows_selected, function(index, rowId){
-           const myArray = rowId.split(",");
+           const myArray = rowId.split("*");
            arr.push(myArray);
         });
 
-    
+     console.log(arr)
      if (rows_selected.length == 0) {
         toast_message_error('Please Select at least one')
      } else {

@@ -11,8 +11,17 @@
 @include('systems.dts.user.pages.my_documents.modals.update_document_modal')
 @endsection
 @section('js')
+@include('global_includes.js.custom_js.select_by_month')
 <script>
-   $(document).ready(function () {
+   var search = function(month) {
+
+      
+      var add_to_url = '';
+      if (month != null) {
+         add_to_url = '?date=' + month
+      }
+      
+
       table = $("#my_document_table").DataTable({
          responsive: true,
          ordering: false,
@@ -25,15 +34,15 @@
          "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
          buttons: datatables_buttons(),
          ajax: {
-            url: base_url + "/user/act/dts/g-m-d",
+            url: base_url + "/user/act/dts/g-m-d" + add_to_url,
             method: 'POST',
             headers: {
                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
             dataSrc: "",
-            error: function (xhr, textStatus, errorThrown) {
-                    toast_message_error('Documents is not displaying... Please Reload the Page Or Contact the developer')
-               }
+            error: function(xhr, textStatus, errorThrown) {
+               toast_message_error('Documents is not displaying... Please Reload the Page Or Contact the developer')
+            }
          },
          columns: [{
             data: 'data'
@@ -51,7 +60,7 @@
             data: 'is'
          }, {
             data: null
-         },],
+         }, ],
          'select': {
             'style': 'multi',
          },
@@ -63,7 +72,7 @@
          }, {
             targets: 3,
             data: null,
-            render: function (data, type, row) {
+            render: function(data, type, row) {
                return view_document(row);
             }
          }, {
@@ -71,15 +80,22 @@
             data: null,
             orderable: false,
             className: 'text-center',
-            render: function (data, type, row) {
+            render: function(data, type, row) {
                return '<div class="btn-group dropstart"><i class="fa fa-ellipsis-v " class="dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false"></i><ul class="dropdown-menu"><li><a class="dropdown-item update_document" data-tracking-number="' + row.tracking_number + '" data-name            ="' + row.document_name + '"data-type            ="' + row.doc_type + '"data-description     ="' + row.description + '"data-destination     ="' + row.destination_type + '" data-origin          ="' + row.origin_id + '" href="javascript:;" class="" data-bs-toggle="modal" data-bs-target="#update_document">Update</a></li></ul></div>';
             }
          }]
       });
+   }
+   
+
+   $(document).ready(function () {
+      search(month);
    });
+      
 
 
-   $(document).on('click', 'a.update_document', function (e) {
+
+   $(document).on('click', 'a.update_document', function(e) {
       $('input[name=t_number]').val($(this).data('tracking-number'));
       $('input[name=document_name]').val($(this).data('name'));
       $('select[name=document_type]').val($(this).data('type'));
@@ -87,7 +103,7 @@
       $('select[name=origin]').val($(this).data('origin'));
       $('select[name=type]').val($(this).data('destination'));
    });
-   $('#update_document_form').on('submit', function (e) {
+   $('#update_document_form').on('submit', function(e) {
       e.preventDefault();
       $(this).find('button').prop('disabled', true);
       $(this).find('button').html('<div class="spinner-border text-info" role="status"><span class="sr-only">Loading...</span></div>');
@@ -96,12 +112,12 @@
       _updatetAjax(url, form, table);
    });
 
-   $(document).on('click', 'a#cancel_documents', function (e) {
+   $(document).on('click', 'a#cancel_documents', function(e) {
 
       var rows_selected = get_select_items_datatable();
       let html = '';
       let arr = [];
-      
+
       if (rows_selected.length == 0) {
          toast_message_error('Please Select at least One')
       } else {
@@ -119,9 +135,6 @@
          $('.display_tracking_number').html(html);
       }
    });
-
-
-
 </script>
 @include('systems.dts.includes.custom_js.cancel_action')
 @include('systems.dts.includes.custom_js.print_slip')
