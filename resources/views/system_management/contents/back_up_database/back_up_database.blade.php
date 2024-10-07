@@ -16,7 +16,7 @@
                     <tr>
                         <th>#</th>
                         <th>File Name</th>
-                        <th>Size (in bytes)</th>
+                        <th>Size (in bytes) </th>
                         <th>Modified Time</th>
                         <th>Actions</th>
                     </tr>
