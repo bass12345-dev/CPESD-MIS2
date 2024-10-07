@@ -23,7 +23,7 @@
                                 <input type="hidden" name="document_ids">
                                 <input type="hidden" name="user_type">
                                 <label for="inputEmail4">Reason/s</label>
-                                <textarea class="form-control" name="reason" style="height: 10rem;" required></textarea>
+                                <textarea class="form-control" name="reason" style="height: 10rem;" ></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

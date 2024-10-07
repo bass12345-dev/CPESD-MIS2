@@ -74,15 +74,15 @@ class DocumentService
                 'created_by'            => $this->userService->user_full_name($key),
                 'is'                    => $status,
                 'history_status'        => $key->doc_status,
-                'data'              =>  $key->document_name.','.
-                                        $key->tracking_number.','.
-                                        $key->type_name.','.
-                                        date('M d Y - h:i a', strtotime($key->created)).','.
-                                        $this->userService->user_full_name($key).','.
-                                        $key->destination_type.','.
-                                        $origin.','.
-                                        $key->document_description.','.
-                                        $key->document_id.','.
+                'data'              =>  $key->document_name.'~'.
+                                        $key->tracking_number.'~'.
+                                        $key->type_name.'~'.
+                                        date('M d Y - h:i a', strtotime($key->created)).'~'.
+                                        $this->userService->user_full_name($key).'~'.
+                                        $key->destination_type.'~'.
+                                        $origin.'~'.
+                                        $key->document_description.'~'.
+                                        $key->document_id.'~'.
                                         $history_id,
 
             );

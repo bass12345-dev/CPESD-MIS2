@@ -24,7 +24,7 @@
                            <tr>
                               <th class="text-center">{{$i++}}</th>
                               <td class="text-center">{{$row->tracking_number}}</td>
-                              <td><a href="{{url('/dts/user/view?tn='.$row->tracking_number)}}" data-toggle="tooltip" data-placement="top" title="View <?php echo $row->tracking_number ?>"><?php echo $row->document_name; ?></a></td>
+                              <td><a href="{{url('/user/dts/view?tn='.$row->tracking_number)}}" data-toggle="tooltip" data-placement="top" title="View <?php echo $row->tracking_number ?>"><?php echo $row->document_name; ?></a></td>
                               <td class="text-center">{{$row->type_name}}</td>
                               <td class="text-center">{{$row->destination_type}}</td>
                            </tr>

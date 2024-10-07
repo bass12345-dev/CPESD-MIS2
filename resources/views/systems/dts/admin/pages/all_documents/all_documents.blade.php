@@ -190,6 +190,7 @@
    $(document).on('click', 'a#cancel_documents', function (e) {
 
       var rows_selected = get_select_items_datatable();
+      console.log(rows_selected)
       let html = '';
       let arr = [];
 
@@ -199,7 +200,7 @@
          $('#cancel_document_modal').modal('show');
          $('input[name=user_type]').val('admin');
          rows_selected.forEach(element => {
-            const myArray = element.split(",");
+            const myArray = element.split("~");
             const first = myArray[0];
             const second = myArray[1];
             arr.push(myArray[8]);
@@ -232,7 +233,7 @@
 
          $('input[name=user_type]').val('admin');
          array.forEach(element => {
-            const myArray = element.split(",");
+            const myArray = element.split("~");
             const first = myArray[0];
             const second = myArray[1];
             arr.push(myArray[9] + '-' + second);

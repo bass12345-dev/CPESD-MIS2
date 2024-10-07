@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $data['title']              = 'User Dashboard';
         $data['establishments']     = $this->customRepository->q_get($this->conn, 'establishments')->count();
         $data['positions']          = $this->customRepository->q_get_where($this->conn, array('type' => 'lls'), 'positions')->count();
-        // $data['employee_positions'] = $this->employeeQuery->QueryPositionsCount();
+        $data['employee_positions'] = $this->employeeQuery->QueryPositionsCount();
         $data['total_establishment_employee'] = $this->employeeQuery->QueryEstablishmentEmployeeTotal();
         return view('systems.lls_whip.lls.user.pages.dashboard.dashboard')->with($data);
     }

@@ -17,6 +17,8 @@
 		</div>
 	</div>
 </body>
+
+@include('systems.dts.includes.components.view_remarks')
 @include('global_includes.js.global_js')
 @include('systems.dts.includes.js')
 @yield('js')
